@@ -13,6 +13,17 @@ export default {
       slug: params.slug,
       page: page.data
     }
+  },
+
+  head() {
+    return {
+      title: this.page.meta_title,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: this.page.meta_description },
+      ],
+    }
   }
 }
 </script>
