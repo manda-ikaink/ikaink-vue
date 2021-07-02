@@ -16,7 +16,8 @@
     "@nuxtjs/pwa": "^3.3.5",
     "bootstrap": "^5.0.2",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.15.7",
+    "nuxt-lazysizes": "^1.4.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
