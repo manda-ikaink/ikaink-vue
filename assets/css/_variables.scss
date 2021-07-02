@@ -1,0 +1,128 @@
+// Custom Typography Variables
+$letter-spacing-base:         0;
+$letter-spacing-xl:           0.15em;
+$letter-spacing-lg:           0.075em;
+$letter-spacing-md:           0.05em;
+$letter-spacing-sm:           0.025em;
+
+$letter-spacing-header-xl:    0.3em;
+$letter-spacing-header-lg:    0.25em;
+$letter-spacing-header-md:    0.2em;
+$letter-spacing-header-sm:    0.15em;
+$letter-spacing-header-xs:    0.1em;
+
+$text-shadow: 3px 3px 5px #000000; 
+
+// Custom Colors
+$almost-black:              #03030d;
+$bruise:                    #23202e;
+$deep-blue:                 #070f19;
+$gray-darkest:              $almost-black;
+$gray-dark:                 #0D1B2A !default;
+$gray:                      #1A2A3A !default;
+$gray-light:                #415B77 !default;
+$gray-lighter:              #758EA8 !default;
+$gray-lightest:             #DBDEE0 !default;
+
+$brand-red:                 #ef4566; // Watermelon
+$brand-pink:                #f67280; // Peach
+$brand-orange:              #f8b195; // Cream Sickle
+$brand-yellow:              #e5eec1; // Pale Yellow
+$brand-green:               #a2d4ab; // Pale Lime Green
+$brand-blue:                #547a82; // Dark Blue
+$brand-teal:                #3eaca8; // Turquoise
+$brand-cyan:                #3eaca8; // Turquoise
+$brand-indigo:              #355c7d; // Dark Lilac
+$brand-purple:              #6c5b7b; // Bruise
+$brand-gray:                #5a5050; // Neutral Gray
+$brand-gray-dark:           #2c2a3b; // Dark Cool Gray
+
+$brand-light:               $brand-yellow; // Pale Yellow
+$brand-primary:             $brand-green; // Pale Lime Green
+$brand-secondary:           $brand-teal; // Turquoise
+$brand-tertiary:            $brand-blue; // Dark Blue
+$brand-dark:                $brand-gray; // Neutral Gray
+$brand-highlight:           $brand-red; // Watermelon
+
+// Bootstrap overrides
+//
+
+// Colors
+$white:    #fff !default;
+$gray-800: $brand-gray !default;
+$gray-900: $brand-gray-dark !default;
+
+$blue:    $brand-blue !default;
+$indigo:  $brand-indigo !default;
+$purple:  $brand-purple !default;
+$pink:    $brand-pink !default;
+$red:     $brand-red !default;
+$orange:  $brand-orange !default;
+$yellow:  $brand-yellow !default;
+$green:   $brand-green !default;
+$teal:    $brand-teal !default;
+$cyan:    $brand-cyan !default;
+
+$primary:       $brand-primary !default;
+$secondary:     $brand-secondary !default;
+$success:       $brand-green !default;
+$info:          $brand-purple !default;
+$warning:       $brand-pink !default;
+$danger:        $brand-red !default;
+$light:         $brand-light !default;
+$dark:          $brand-dark !default;
+
+// Options
+$enable-negative-margins:     true !default;
+
+$variable-prefix:             bs- !default;
+
+// body
+$body-bg:                   $almost-black !default;
+$body-color:                $white !default;
+
+// Links
+$link-color:                $pink !default;
+$link-decoration:           none !default;
+$link-shade-percentage:     20% !default;
+$link-hover-color:          shift-color($link-color, $link-shade-percentage) !default;
+$link-hover-decoration:     underline !default;
+
+// Paragraphs
+$paragraph-margin-bottom:   1.25rem !default;
+
+// Grid Containers
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+// Typography
+$font-family-sans-serif:      'Nunito Sans', serif !default;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:            var(--#{$variable-prefix}font-sans-serif) !default;
+$font-family-code:            var(--#{$variable-prefix}font-monospace) !default;
+
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg:                ($font-size-base * 1.25) !default;
+$font-size-sm:                ($font-size-base * .875) !default;
+
+$line-height-base:            1.85 !default;
+$line-height-sm:              1.5 !default;
+$line-height-lg:              2 !default;
+
+$h1-font-size:                $font-size-base * 3.5 !default;
+$h2-font-size:                $font-size-base * 3 !default;
+$h3-font-size:                $font-size-base * 2.5 !default;
+$h4-font-size:                $font-size-base * 2 !default;
+$h5-font-size:                $font-size-base * 1.5 !default;
+$h6-font-size:                $font-size-base * 1.25!default;
+
+$headings-margin-bottom:      2rem !default;
+$headings-font-family:        'Moon', sans-serif !default;
+$headings-font-weight:        lighter !default;
+$headings-line-height:        $line-height-sm !default;
+$headings-color:              inherit !default;
