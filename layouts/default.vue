@@ -2,7 +2,7 @@
   <div id="__page">
     <Header></Header>
 
-    <main>
+    <main id="__main">
       <Nuxt />
     </main>
 
