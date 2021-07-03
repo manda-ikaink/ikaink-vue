@@ -1,4 +1,14 @@
+@use "sass:math";
+
+$font-size-root: 16px;
+
+@function rem($size) {
+  $remSize: math.div($size, $font-size-root);
+  @return #{$remSize}rem;
+}
+
 // Custom Typography Variables
+//
 $letter-spacing-base:         0;
 $letter-spacing-xl:           0.15em;
 $letter-spacing-lg:           0.075em;
@@ -14,6 +24,8 @@ $letter-spacing-header-xs:    0.1em;
 $text-shadow: 3px 3px 5px #000000; 
 
 // Custom Colors
+//
+$white:                     #ffffff;
 $almost-black:              #03030d;
 $bruise:                    #23202e;
 $deep-blue:                 #070f19;
@@ -44,11 +56,33 @@ $brand-tertiary:            $brand-blue; // Dark Blue
 $brand-dark:                $brand-gray; // Neutral Gray
 $brand-highlight:           $brand-red; // Watermelon
 
+// Accessibility
+$focus-outlinewidth: 2px;
+$focus-outlinestyle: solid;
+$focus-outlinecolor: rgba($white, 0.5);
+$focus-outlinecolor-dark: $brand-gray;
+$focus-outlineoffset: 2px;
+
+// Custom Components
+//
+
+// Social Media List
+$social-list-bg: rgba($white, 0.3);
+$social-list-hover-bg: $brand-pink;
+$social-list-border: 0;
+$social-list-hover-border: 0;
+$social-list-border-radius: 100%;
+$social-list-color: $white;
+$social-list-hover-color: $white;
+$social-list-size: 20px;
+$social-list-height: 40px;
+$social-list-width: 40px;
+$social-list-margin: 0 5px 5px;
+
 // Bootstrap overrides
 //
 
 // Colors
-$white:    #fff !default;
 $gray-800: $brand-gray !default;
 $gray-900: $brand-gray-dark !default;
 
@@ -84,8 +118,8 @@ $body-color:                $white !default;
 // Links
 $link-color:                $pink !default;
 $link-decoration:           none !default;
-$link-shade-percentage:     20% !default;
-$link-hover-color:          shift-color($link-color, $link-shade-percentage) !default;
+$link-shade-percentage:     -20% !default;
+$link-hover-color:          $brand-primary !default;
 $link-hover-decoration:     underline !default;
 
 // Paragraphs
@@ -99,6 +133,10 @@ $container-max-widths: (
   xl: 1200px,
   xxl: 1400px
 ) !default;
+
+// Transitions
+$transition-base:             all .5s cubic-bezier(.7,0,.3,1) !default;
+$transition-fade:             opacity .5s cubic-bezier(.7,0,.3,1) !default;
 
 // Typography
 $font-family-sans-serif:      'Nunito Sans', serif !default;
@@ -126,3 +164,19 @@ $headings-font-family:        'Moon', sans-serif !default;
 $headings-font-weight:        lighter !default;
 $headings-line-height:        $line-height-sm !default;
 $headings-color:              inherit !default;
+
+// Offcanvas
+
+$offcanvas-padding-y:               1rem !default;
+$offcanvas-padding-x:               1rem !default;
+$offcanvas-horizontal-width:        400px !default;
+$offcanvas-vertical-height:         30vh !default;
+$offcanvas-transition-duration:     .5s !default;
+$offcanvas-border-color:            transparent !default;
+$offcanvas-border-width:            0 !default;
+$offcanvas-title-line-height:       $line-height-base !default;
+$offcanvas-bg-color:                $almost-black !default;
+$offcanvas-color:                   $white !default;
+$offcanvas-box-shadow:              none !default;
+$offcanvas-backdrop-bg:             $almost-black !default;
+$offcanvas-backdrop-opacity:        0.5 !default;

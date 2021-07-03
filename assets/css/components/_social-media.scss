@@ -1,0 +1,26 @@
+.social-list {
+  &__item { margin: $social-list-margin; }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $social-list-height;
+    width: $social-list-width;
+    font-size: $social-list-size;
+    background: $social-list-bg;
+    border: $social-list-border;
+    border-radius: $social-list-border-radius;
+    color: $social-list-color;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: $social-list-hover-bg;
+      border: $social-list-hover-border;
+      color: $social-list-hover-color;
+      text-decoration: none;
+    }
+  }
+}

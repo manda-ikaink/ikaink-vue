@@ -1,7 +1,8 @@
+/* eslint-disable vue/no-v-html */
 <template>
-  <div>
-    <div v-html="page.content"></div>
-  </div>
+  <!-- eslint-disable vue/no-v-html -->
+  <div v-html="page.content"></div>
+  <!--eslint-enable-->
 </template>
 
 <script>

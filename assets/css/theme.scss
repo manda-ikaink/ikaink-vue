@@ -1,3 +1,15 @@
 @import "./mixins/gradients.scss";
+@import "./mixins/burger.scss";
+
 @import "./framework.scss";
+@import "./fonts.scss";
 @import "./globals.scss";
+@import "./typography.scss";
+
+@import "./ui/offcanvas";
+
+@import "./components/social-media";
+@import "./components/navigation";
+
+@import "./header.scss";
+@import "./footer.scss";

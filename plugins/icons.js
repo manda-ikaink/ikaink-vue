@@ -6,6 +6,7 @@ import IconMinus from '../components/icons/IconMinus'
 import IconPlus from '../components/icons/IconPlus'
 import IconStars from '../components/icons/IconStars'
 import IconTag from '../components/icons/IconTag'
+import IconTwitter from '../components/icons/IconTwitter'
 
 const components = { 
   IconFacebook, 
@@ -14,7 +15,8 @@ const components = {
   IconMinus,
   IconPlus,
   IconStars,
-  IconTag
+  IconTag,
+  IconTwitter
 }
 
 Object.entries(components).forEach(([name, component]) => {

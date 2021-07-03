@@ -28,7 +28,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~plugins/icons'
+    '~plugins/icons',
+    '~plugins/ui'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -39,6 +40,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     'nuxt-lazysizes',
+    'nuxt-purgecss',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -63,10 +65,15 @@ export default {
   build: {
   },
 
+  // Lazysizes plugin for nuxt: https://github.com/ivodolenc/nuxt-lazysizes
   lazySizes: {
     extendAssetUrls: {
       img: ['src', 'srcset', 'data-src', 'data-srcset'],
       source: ['src', 'srcset', 'data-src', 'data-srcset'],
     },
-  }
+  },
+
+  // PurgeCSS plugin for nuxt: https://purgecss.com/guides/nuxt.html
+  purgeCSS: {
+  },
 }
