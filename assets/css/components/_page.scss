@@ -1,0 +1,17 @@
+.page,
+%page {
+  padding-top: rem(180px);
+  padding-bottom: rem(100px);
+}
+
+.page-content {
+  flex: 1 1 auto;
+  padding-top: rem(100px);
+  padding-bottom: rem(100px);
+  background-color: $deep-blue;
+}
+
+.page-heading {
+	padding-top: 150px;
+  background: $deep-blue;
+}

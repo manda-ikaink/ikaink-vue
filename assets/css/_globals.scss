@@ -36,6 +36,15 @@ body {
   overflow: hidden; // 1
 }
 
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
 .visually-hidden {
   @include visually-hidden;
 }
@@ -177,19 +186,6 @@ img { max-width: 100%; }
 
 .drop-shadow { filter: drop-shadow(3px 3px 5px #000000); }
 
-.page,
-%page {
-  padding-top: rem(180px);
-  padding-bottom: rem(100px);
-}
-
-.page-content {
-  flex: 1 1 auto;
-  padding-top: rem(100px);
-  padding-bottom: rem(100px);
-  background-color: $deep-blue;
-}
-
 /* 
  * Accessibility Styles
  *
@@ -206,12 +202,20 @@ details,
 [tabindex]:not([tabindex="-1"]),
 [contenteditable="true"] {
   // 1a
-  &:focus {
+  // &:focus:not(:focus-visible) {
+  //   outline: none !important;
+  // }
+
+  &:focus-visible {
     outline: $focus-outlinewidth $focus-outlinestyle $focus-outlinecolor !important;
     outline-offset: $focus-outlineoffset !important;
   }
 
   .bg--dark & { outline-color: $focus-outlinecolor-dark; }
+}
+
+[href]:active {
+  outline: none!important;
 }
  
 label {

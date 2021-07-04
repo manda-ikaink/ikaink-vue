@@ -28,6 +28,7 @@ export default {
   mounted() {
     const canvas = document.getElementById(this.target)
     const btn = document.getElementById(this.id)
+    const links = document.querySelectorAll('.offcanvas a')
 
     canvas.addEventListener('show.bs.offcanvas', () => {
       btn.disabled = true
@@ -47,8 +48,14 @@ export default {
       btn.disabled = false
     })
 
+    links.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        offcanvas.hide()
+      })
+    })
+
     // eslint-disable-next-line no-new
-    new Offcanvas(canvas)
+    const offcanvas = new Offcanvas(canvas)
   }
 }
 </script>

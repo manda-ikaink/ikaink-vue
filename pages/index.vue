@@ -10,12 +10,14 @@
     <div class="home-hero__container container d-flex align-items-center justify-content-center justify-content-lg-start">
       <div class="home-hero__content position-relative">
         <h2 class="hero-title text-center text-lg-start">
-          <!-- eslint-disable vue/no-v-html -->
-          <div v-if="page.content" class="home-hero__hover" v-html="page.content"></div>
-          <!--eslint-enable-->
+          <div class="home-hero__hover">
+            <NuxtLink title="View Gallery of Art &amp; Illustrations " to="/gallery">Art, </NuxtLink><br>
+            <NuxtLink title="View Scrapbook of Notes, Pictures &amp; Updates" to="/scrapbook">Notes, </NuxtLink><br>
+            <NuxtLink title="View Development &amp; Coding Projects" to="/projects">Projects</NuxtLink>
+          </div>
 
           <span v-if="page.author" class="hero-subtitle d-block"> by </span>
-          <span v-if="page.author" class="hero-subtitle d-block">{{ page.author }}</span>
+          <span v-if="page.author" class="hero-subtitle d-block">Amanda Eldreth</span>
         </h2>
       </div>
     </div>

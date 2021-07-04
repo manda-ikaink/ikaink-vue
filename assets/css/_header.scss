@@ -34,6 +34,8 @@
 		font-family: $headings-font-family;
 		font-weight: lighter;
 		letter-spacing: 0.15em;
+    line-height: 1;
+    font-size: 0;
 		margin: 0 auto;
 		vertical-align: middle;
 		transition: all $header-transition;

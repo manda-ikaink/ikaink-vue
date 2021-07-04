@@ -30,29 +30,29 @@
         <div slot="body">
           <ul id="nav-main" class="nav">
             <li class="nav__item">
-              <a id="nav-link-0" class="nav__link" href="https://ika.ink/about" target="_parent" tabindex="0">
+              <NuxtLink id="nav-link-0" class="nav__link" to="/about">
                 About
-              </a>
+              </NuxtLink>
             </li>
             <li class="nav__item">
-              <a id="nav-link-1" class="nav__link" href="https://ika.ink/gallery" target="_parent" tabindex="0">
+              <NuxtLink id="nav-link-1" class="nav__link" to="/gallery">
                 Gallery
-              </a>
+              </NuxtLink>
             </li>
             <li class="nav__item nav__item--active">
-              <a id="nav-link-2" class="nav__link" href="https://ika.ink/scrapbook" target="_parent" tabindex="0">
+              <NuxtLink id="nav-link-2" class="nav__link" to="/scrapbook">
                 Scrapbook
-              </a>
+              </NuxtLink>
             </li>
             <li class="nav__item">
-              <a id="nav-link-3" class="nav__link" href="https://ika.ink/projects" target="_parent" tabindex="0">
+              <NuxtLink id="nav-link-3" class="nav__link" to="/projects">
                 Projects
-              </a>
+              </NuxtLink>
             </li>
             <li class="nav__item">
-              <a id="nav-link-4" class="nav__link" href="https://ika.ink/contact" target="_parent" tabindex="0">
+              <NuxtLink id="nav-link-4" class="nav__link" to="/contact">
                 Contact
-              </a>
+              </NuxtLink>
             </li>
           </ul>
 
