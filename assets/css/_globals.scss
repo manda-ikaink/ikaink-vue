@@ -16,7 +16,7 @@ body {
   line-height: 2.5;
   font-size: 1rem;
   font-weight: 300;
-  background: $brand-gray-dark;
+  background: $almost-black;
 
   &.prevent-scroll { overflow: hidden; } // 2
 }
@@ -34,15 +34,6 @@ body {
 #__nuxt { 
   min-height: 100vh; // 1
   overflow: hidden; // 1
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.5s;
-}
-.page-enter,
-.page-leave-to {
-  opacity: 0;
 }
 
 .visually-hidden {
@@ -295,4 +286,23 @@ a.external:not(.btn):not(.nav-collapse__link):not(.social-list__link) {
     line-height: 1;
     margin-left: 3px;
   }
+}
+
+// Animations and transitions
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+.blur-up {
+  filter: blur(10px);
+  transition: filter 0.8s ease-in;
+}
+
+.blur-up.lazyloaded {
+  filter: blur(0);
 }

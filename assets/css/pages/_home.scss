@@ -28,7 +28,7 @@
 		}
 
 		&:hover {
-			.home-hero__link {
+			a {
 				@include media-breakpoint-up(lg) {
 					color: transparent; 
 					text-shadow: 0 0 10px $deep-blue;

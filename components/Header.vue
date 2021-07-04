@@ -2,14 +2,7 @@
   <header ref="header" class="page-header">
     <div class="container-fluid">
       <!-- Logo -->
-      <h1 v-if="$route.path === '/'" class="page-header__logo">
-        <NuxtLink to="/" class="d-flex align-items-center justify-content-center">
-          <img class="page-header__logo--center svg drop-shadow" src="~assets/images/ika-ink-large-white.svg" alt="ika INK Logo" :title="$store.state.websiteTitle">
-          <span class="page-header__logo--left drop-shadow">ika</span>
-          <span class="page-header__logo--right drop-shadow">INK</span>
-        </NuxtLink>
-      </h1>
-      <div  v-else class="page-header__logo">
+      <div class="page-header__logo">
         <NuxtLink to="/" class="d-flex align-items-center justify-content-center">
           <img class="page-header__logo--center svg drop-shadow" src="~assets/images/ika-ink-large-white.svg" alt="ika INK Logo" :title="$store.state.websiteTitle">
           <span class="page-header__logo--left drop-shadow">ika</span>

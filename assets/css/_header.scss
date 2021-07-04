@@ -31,13 +31,7 @@
   &__logo {
 		color: $white;
 		display: inline-block;
-		font-family: $headings-font-family;
-		font-weight: lighter;
-		letter-spacing: 0.15em;
-    line-height: 1;
-    font-size: 0;
 		margin: 0 auto;
-		vertical-align: middle;
 		transition: all $header-transition;
 
     a,
@@ -47,17 +41,20 @@
 			display: inline-block;
 			width: 60px;
 			height: auto;
+      margin: 0 30px;
 			transition: all $header-transition; 
-			vertical-align: middle;
 		}
 
 		&--left,
 		&--right {
 			display: inline-block;
-			padding: 15px 30px;
+			padding: 0;
+      margin-right: -12px;
+      font-family: $headings-font-family;
 			font-size: 18px;
 			font-weight: lighter;
-			letter-spacing: 13px;
+			letter-spacing: 0.75em;
+      line-height: 1;
 			color: $white;
 			transition: all $header-transition;
 			text-shadow: $text-shadow;

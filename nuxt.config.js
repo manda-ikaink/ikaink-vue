@@ -16,6 +16,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preconnect', href: 'https://admin.ika.ink' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap' }
     ],
@@ -71,10 +72,24 @@ export default {
       img: ['src', 'srcset', 'data-src', 'data-srcset'],
       source: ['src', 'srcset', 'data-src', 'data-srcset'],
     },
+    plugins: {
+      blurUp: false,
+      bgset: true,
+    },
+    lazyClass: 'lazyload',
+    loadedClass: 'lazyloaded',
+    loadingClass: 'lazyloading',
+    preloadClass: 'lazypreload',
+    errorClass: 'lazyerror',
+    srcAttr: 'data-src',
+    srcsetAttr: 'data-srcset',
+    sizesAttr: 'data-sizes',
+    loadMode: 2,
+    loadHidden: true,
   },
 
   // PurgeCSS plugin for nuxt: https://purgecss.com/guides/nuxt.html
   purgeCSS: {
-    whitelist: ['body', 'html', 'nuxt-progress', 'show', 'fade'],
+    whitelist: ['body', 'html', 'nuxt-progress', 'show', 'fade', 'active', 'collapse', 'hide', 'close'],
   },
 }
