@@ -27,6 +27,18 @@ export default {
     '~/assets/css/theme.scss',
   ],
 
+  // Style resources plugin to make global styles available in vue components
+  styleResources: {
+    scss: [
+      './node_modules/bootstrap/scss/_functions.scss',
+      './assets/css/_variables.scss',
+      './node_modules/bootstrap/scss/_variables.scss',
+      './node_modules/bootstrap/scss/mixins/_breakpoints.scss',
+      './node_modules/bootstrap/scss/mixins/_visually-hidden.scss'
+    ],
+    hoistUseStatements: true
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/icons',
@@ -40,6 +52,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources',
     'nuxt-lazysizes',
     'nuxt-purgecss',
   ],
@@ -64,6 +77,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // Temp fix for error on style-resource-module error https://github.com/nuxt-community/style-resources-module/issues/143
+    extend(config, { loaders }){
+      loaders.scss.additionalData = '@use "sass:math";'
+    }
   },
 
   // Lazysizes plugin for nuxt: https://github.com/ivodolenc/nuxt-lazysizes

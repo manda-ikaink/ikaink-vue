@@ -32,9 +32,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
-import { tooltip } from 'bootstrap'
-
 export default {
   async asyncData ({ params, $axios }) {
     const page = await $axios.$get(`https://admin.ika.ink/items/homepage`)
