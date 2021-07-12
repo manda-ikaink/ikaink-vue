@@ -6,7 +6,7 @@
 
     <span class="gallery-entry__name d-block text-center text-display--xxs mb-0">{{ name }}</span>
 
-    <a :ref="`entryLink${id}`" :href="`#${id}`" class="block-link-full" :aria-label="`View ${name}`" @click="triggerEvent(id)"></a>
+    <a :id="`entryLink${id}`" :ref="`entryLink${id}`" :href="`#${id}`" class="block-link-full" :aria-label="`View ${name}`" @click.prevent="triggerEvent(id)"></a>
   </div>
 </template>
 

@@ -298,11 +298,22 @@ a.external:not(.btn):not(.nav-collapse__link):not(.social-list__link) {
   opacity: 0;
 }
 
-.blur-up {
+// Lazy Loading
+img.blur-up {
   filter: blur(10px);
   transition: filter 0.8s ease-in;
 }
 
-.blur-up.lazyloaded {
+img.blur-up.lazyloaded {
   filter: blur(0);
+}
+
+img.fade-in.lazyloading {
+  opacity: 0;
+}
+
+img.fade-in.lazyload,
+img.fade-in.lazyloaded {
+  opacity: 1;
+  transition: opacity 0.8s ease-in;
 }

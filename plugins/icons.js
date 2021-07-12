@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import IconClose from '../components/icons/IconClose'
 import IconFacebook from '../components/icons/IconFacebook'
 import IconGithub from '../components/icons/IconGithub'
 import IconInstagram from '../components/icons/IconInstagram'
@@ -9,6 +10,7 @@ import IconTag from '../components/icons/IconTag'
 import IconTwitter from '../components/icons/IconTwitter'
 
 const components = { 
+  IconClose,
   IconFacebook, 
   IconGithub, 
   IconInstagram,

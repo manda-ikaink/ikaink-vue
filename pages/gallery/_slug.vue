@@ -58,10 +58,14 @@ export default {
     async showGallery(id) {
       const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries/${id}?fields=name,image.*,year,tools,link,description`)
       this.activeEntry = item.data
+      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = '0px'
     },
 
     hideGallery() {
       this.activeEntry = null
+      document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
     }
   }
 }
