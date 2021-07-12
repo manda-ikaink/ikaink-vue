@@ -7,7 +7,7 @@
       <source :data-srcset="`${imagePath}?fit=cover&width=370&height=370`" media="(min-width: 576px) and (max-width: 767px)" />
       <source :data-srcset="`${imagePath}?fit=cover&width=435&height=435`" media="(min-width: 768px) and (max-width: 991px)" />
       <source :data-srcset="`${imagePath}?fit=cover&width=400&height=400`" media="(min-width: 1200px)" />
-      <img class="gallery-card__img img-fluid w-100 blur-up lazyload" width="470" height="470" :src="`${imagePath}?fit=cover&width=100&height=100`" :data-src="`${imagePath}?fit=cover&width=470&height=470`" :title="(image.title ? image.title : null)" :alt="(image.description ? image.description : '')" />
+      <img class="gallery-card__img img-fluid w-100 blur-up lazyload" width="470" height="470" :src="`${imagePath}?fit=cover&width=100&height=100`" :data-src="`${imagePath}?fit=cover&width=470&height=470`" :title="(image.title ? image.title : null)" :alt="(image.description ? image.description : name)" />
     </picture>
 
     <div class="gallery-card__header d-flex align-items-center justify-content-center">
@@ -77,14 +77,6 @@ export default {
     overflow: hidden;
   }
 
-  &__name {
-    @include media-breakpoint-between(lg,xxl) { font-size: 2.75vw; }
-
-    @include media-breakpoint-between(sm,lg) { font-size: 3.75vw; }
-
-    @include media-breakpoint-down(sm) { font-size: 6.5vw; }
-  }
-
   &__img {
     position: absolute;
     top: 50%;
@@ -124,6 +116,14 @@ export default {
         text-shadow: 0 0 8px $white;
       }
     }
+  }
+
+  &__name {
+    @include media-breakpoint-between(lg,xxl) { font-size: 2.75vw; }
+
+    @include media-breakpoint-between(sm,lg) { font-size: 3.75vw; }
+
+    @include media-breakpoint-down(sm) { font-size: 6.5vw; }
   }
 }
 </style>

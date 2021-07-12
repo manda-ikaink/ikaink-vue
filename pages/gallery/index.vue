@@ -47,3 +47,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.container-fluid {
+  max-width: 1400px;
+}
+</style>
