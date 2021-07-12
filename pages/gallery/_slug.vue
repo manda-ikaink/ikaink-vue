@@ -14,40 +14,68 @@
             <GalleryEntry 
               :id="entry.gallery_entries_id.id"
               :name="entry.gallery_entries_id.name" 
-              :image="entry.gallery_entries_id.image">
+              :image="entry.gallery_entries_id.image"
+              @show-gallery="showGallery">
             </GalleryEntry>
           </div>
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <GalleryPopup v-if="activeEntry" :entry="activeEntry" @close-gallery="hideGallery"></GalleryPopup>
+    </transition>
   </div>
 </template>
 
 <script>
-  export default {
-    async asyncData ({ params, $axios }) {
-      const page = await $axios.$get(`https://admin.ika.ink/items/gallery_categories?filter[slug][_eq]=${params.slug}&fields=*.*,entries.*.*.*`)
+export default {
+  async asyncData ({ params, $axios }) {
+    const page = await $axios.$get(`https://admin.ika.ink/items/gallery_categories?filter[slug][_eq]=${params.slug}&fields=*.*,entries.*.*.*`)
 
-      return {
-        slug: params.slug,
-        page: page.data[0],
-        entries: page.data[0].entries
-      }
+    return {
+      slug: params.slug,
+      page: page.data[0],
+      entries: page.data[0].entries
+    }
+  },
+
+  data () {
+    return {
+      activeEntry: null
+    }
+  },
+
+  head() {
+    return {
+      title: this.page.meta_title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.page.meta_description },
+      ],
+    }
+  },
+
+  methods: {
+    async showGallery(id) {
+      const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries/${id}?fields=name,image.*,year,tools,link,description`)
+      this.activeEntry = item.data
     },
 
-    head() {
-      return {
-        title: this.page.meta_title,
-        meta: [
-          { hid: 'description', name: 'description', content: this.page.meta_description },
-        ],
-      }
+    hideGallery() {
+      this.activeEntry = null
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
 .container-fluid {
   max-width: 1200px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

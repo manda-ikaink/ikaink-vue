@@ -1,14 +1,12 @@
 <template>
   <div class="gallery-entry" :aria-label="name">
     <div class="gallery-entry__image mb-3">
-      <img v-if="image" class="gallery-entry__img img-fluid w-100 blur-up lazyload" width="300" height="300" :src="`${imagePath}?fit=cover&width=100&height=100`" :data-src="`${imagePath}?fit=cover&width=300&height=300`" :title="(image.title ? image.title : null)" :alt="(image.description ? image.description : name)" />
+      <img v-if="image" class="gallery-entry__img img-fluid w-100 blur-up lazyload" width="320" height="320" :src="`${imagePath}?fit=cover&width=100&height=100`" :data-src="`${imagePath}?fit=cover&width=320&height=320`" :title="(image.title ? image.title : null)" :alt="(image.description ? image.description : name)" />
     </div>
 
-    <div class="gallery-entry__header d-flex align-items-center justify-content-center">
-      <span class="gallery-entry__name text-display--xxs mb-0">{{ name }}</span>
-    </div>
+    <span class="gallery-entry__name d-block text-center text-display--xxs mb-0">{{ name }}</span>
 
-    <NuxtLink :to="`#${id}`" class="block-link-full" :aria-label="`View ${name}`"></NuxtLink>
+    <a :ref="`entryLink${id}`" :href="`#${id}`" class="block-link-full" :aria-label="`View ${name}`" @click="triggerEvent(id)"></a>
   </div>
 </template>
 
@@ -25,7 +23,7 @@ export default {
       required: true
     },
     id: {
-      type: String,
+      type: Number,
       required: true
     },
     image: {
@@ -39,6 +37,12 @@ export default {
     // eslint-disable-next-line object-shorthand
     imagePath: function () {
       return this.getImagePath(this.image)
+    }
+  },
+
+  methods: {
+    triggerEvent(id) {
+      this.$emit('show-gallery', id)
     }
   }
 }
@@ -82,14 +86,6 @@ export default {
     .gallery-entry:focus-within {
       @include media-breakpoint-up(lg) { transform: scale(1.0); }
     }
-  }
-
-  &__header {
-    text-align: center;
-    text-shadow: 0 0 8px $almost-black;
-    background-color: rgba($almost-black, 0.3);
-    transition: all 0.75s cubic-bezier(0.85, 0, 0.15, 1);
-    backface-visibility: hidden;
   }
 
   &__name {
