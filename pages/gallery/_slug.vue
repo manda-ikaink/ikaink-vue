@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <transition name="fade">
+    <transition name="fadeup">
       <GalleryPopup v-if="activeEntry" :entry="activeEntry" @close-gallery="hideGallery"></GalleryPopup>
     </transition>
   </div>
@@ -56,7 +56,7 @@ export default {
 
   methods: {
     async showGallery(id) {
-      const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries/${id}?fields=name,image.*,year,tools,link,description`)
+      const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries/${id}?fields=name,image.*,year,tools,size,link,description`)
       this.activeEntry = item.data
       document.body.style.overflow = 'hidden'
       document.body.style.paddingRight = '0px'
@@ -74,12 +74,5 @@ export default {
 <style lang="scss" scoped>
 .container-fluid {
   max-width: 1200px;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 </style>
