@@ -1,13 +1,13 @@
 <template>
-  <div id="__gallery">
+  <div id="__gallery" class="d-flex flex-column flex-auto">
     <div class="page-heading">
-      <h1 v-if="gallery.title" class="text-center">{{ gallery.title }}</h1>
-      <span v-if="gallery.subtitle" class="text-hr">{{ gallery.subtitle }}</span>
+      <h1 v-if="page.title" class="text-center">{{ page.title }}</h1>
+      <span v-if="page.subtitle" class="text-hr">{{ page.subtitle }}</span>
       <div class="d-flex align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
       </div>
     </div>
-    <div class="page-content pt-5">
+    <div class="page-content flex-auto pt-5">
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div v-for="category in categories" :key="category.id" class="col-sm-6 col-lg-4 px-3 mb-4">
@@ -31,17 +31,16 @@ export default {
 
     return {
       slug: params.slug,
-      gallery: gallery.data,
-      page: gallery,
+      page: gallery.data,
       categories: categories.data,
     }
   },
 
   head() {
     return {
-      title: this.gallery.meta_title,
+      title: this.page.meta_title,
       meta: [
-        { hid: 'description', name: 'description', content: this.gallery.meta_description },
+        { hid: 'description', name: 'description', content: this.page.meta_description },
       ],
     }
   }

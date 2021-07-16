@@ -177,6 +177,10 @@ img { max-width: 100%; }
 
 .drop-shadow { filter: drop-shadow(3px 3px 5px #000000); }
 
+.flex-auto {
+  flex: 1 1 auto;
+}
+
 /* 
  * Accessibility Styles
  *

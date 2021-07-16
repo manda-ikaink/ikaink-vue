@@ -5,10 +5,13 @@
 }
 
 .page-content {
-  flex: 1 1 auto;
   padding-top: rem(100px);
   padding-bottom: rem(100px);
   background-color: $deep-blue;
+
+  &--transparent {
+    background-color: rgba($deep-blue, 0.5);
+  }
 }
 
 .page-heading {
