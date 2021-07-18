@@ -1,6 +1,6 @@
 <template>
-  <nav class="breadcrumbs d-print-none" aria-label="breadcrumbs">
-    <ul class="container list-unstyled d-flex flex-wrap mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <nav class="breadcrumbs d-print-none px-0" aria-label="breadcrumbs">
+    <ul class="list-unstyled d-flex flex-wrap mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
       <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
         <IconStars></IconStars>
         <NuxtLink to="/" class="breadcrumbs__link" itemprop="item">

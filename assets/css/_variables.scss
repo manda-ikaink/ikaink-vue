@@ -180,3 +180,42 @@ $offcanvas-color:                   $white !default;
 $offcanvas-box-shadow:              none !default;
 $offcanvas-backdrop-bg:             $almost-black !default;
 $offcanvas-backdrop-opacity:        0.5 !default;
+
+// Pagination
+
+// scss-docs-start pagination-variables
+$pagination-padding-y:              .375rem !default;
+$pagination-padding-x:              .75rem !default;
+$pagination-padding-y-sm:           .25rem !default;
+$pagination-padding-x-sm:           .5rem !default;
+$pagination-padding-y-lg:           .75rem !default;
+$pagination-padding-x-lg:           1.5rem !default;
+
+$pagination-color:                  $white !default;
+$pagination-bg:                     $almost-black !default;
+$pagination-border-width:           0 !default;
+$pagination-border-radius:          50% !default;
+$pagination-margin-start:           0 !default;
+$pagination-border-color:           transparent !default;
+
+$pagination-focus-color:            $almost-black !default;
+$pagination-focus-bg:               $white !default;
+$pagination-focus-box-shadow:       none !default;
+$pagination-focus-outline:          0 !default;
+
+$pagination-hover-color:            $white !default;
+$pagination-hover-bg:               rgba($almost-black, 0.8) !default;
+$pagination-hover-border-color:     transparent !default;
+
+$pagination-active-color:           $white !default;
+$pagination-active-bg:              $primary !default;
+$pagination-active-border-color:    transparent !default;
+
+$pagination-disabled-color:         $white !default;
+$pagination-disabled-bg:            rgba($almost-black, 0.5) !default;
+$pagination-disabled-border-color:  transparent !default;
+
+$pagination-transition:              color .15s ease-in-out, background-color .15s ease-in-out !default;
+
+$pagination-border-radius-sm:       50% !default;
+$pagination-border-radius-lg:       50% !default;
