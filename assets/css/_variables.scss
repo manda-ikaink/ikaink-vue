@@ -181,6 +181,42 @@ $offcanvas-box-shadow:              none !default;
 $offcanvas-backdrop-bg:             $almost-black !default;
 $offcanvas-backdrop-opacity:        0.5 !default;
 
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+// scss-docs-start dropdown-variables
+$dropdown-min-width:                250px !default;
+$dropdown-padding-x:                0 !default;
+$dropdown-padding-y:                .5rem !default;
+$dropdown-spacer:                   .125rem !default;
+$dropdown-font-size:                $font-size-base !default;
+$dropdown-color:                    $white !default;
+$dropdown-bg:                       $deep-blue !default;
+$dropdown-border-color:             $deep-blue !default;
+$dropdown-border-radius:            20px !default;
+$dropdown-border-width:             1px !default;
+$dropdown-inner-border-radius:      subtract($dropdown-border-radius, $dropdown-border-width) !default;
+$dropdown-divider-bg:               rgba($white, 0.3) !default;
+$dropdown-divider-margin-y:         0.5rem * .5 !default;
+$dropdown-box-shadow:               none !default;
+
+$dropdown-link-color:               $white !default;
+$dropdown-link-hover-color:         $deep-blue !default;
+$dropdown-link-hover-bg:            $primary !default;
+
+$dropdown-link-active-color:        $deep-blue !default;
+$dropdown-link-active-bg:           $primary !default;
+
+$dropdown-link-disabled-color:      rgba($white, 0.5) !default;
+
+$dropdown-item-padding-y:           0.5rem * .25 !default;
+$dropdown-item-padding-x:           0.5rem !default;
+
+$dropdown-header-color:             $white !default;
+$dropdown-header-padding:           $dropdown-padding-y $dropdown-item-padding-x !default;
+// scss-docs-end dropdown-variables
+
 // Pagination
 
 // scss-docs-start pagination-variables

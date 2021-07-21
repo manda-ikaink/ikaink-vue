@@ -1,20 +1,30 @@
 <template>
   <div class="scrapbook-card">
-    <picture v-if="image" class="scrapbook-card__image">
-      <source :data-srcset="`${imagePath}?fit=cover&width=335&height=335`" media="(max-width: 356px)" />
-      <source :data-srcset="`${imagePath}?fit=cover&width=435&height=435`" media="(min-width: 357px) and (max-width: 575px)" />
-      <source :data-srcset="`${imagePath}?fit=cover&width=370&height=370`" media="(min-width: 576px) and (max-width: 767px)" />
-      <source :data-srcset="`${imagePath}?fit=cover&width=435&height=435`" media="(min-width: 768px) and (max-width: 991px)" />
-      <source :data-srcset="`${imagePath}?fit=cover&width=400&height=400`" media="(min-width: 1200px)" />
-      <img class="scrapbook-card__img img-fluid w-100 blur-up lazyload" width="470" height="470" :src="`${imagePath}?fit=cover&width=100&height=100`" :data-src="`${imagePath}?fit=cover&width=470&height=470`" :title="(image.title ? image.title : null)" :alt="(image.description ? image.description : name)" />
-    </picture>
+    <div class="position-relative">
+      <picture v-if="image" class="scrapbook-card__image" :class="ratio ? `scrapbook-card__image--${ratio}` : 'scrapbook-card__image--1-1'">
+        <img class="scrapbook-card__img img-fluid w-100 fade-in lazyload" :width="imageWidth" :height="imageHeight" :data-src="`${imagePath}?fit=cover&width=${imageWidth}&height=${imageHeight}`" :title="(image.title ? image.title : null)" :alt="(image.description ? image.description : title)" />
+      </picture>
 
-    <div class="scrapbook-card__content">
-      <span class="scrapbook-card__title text-display--md mb-0">{{ title }}</span>
-      <p v-if="headline" class="mb-3">{{ headline }}</p>
+      <div class="scrapbook-card__content">
+        <span class="scrapbook-card__title text-display--md mb-0">{{ title }}</span>
+        <p v-if="headline" class="mb-0">{{ headline }}</p>
+      </div>
+      
+      <NuxtLink :to="{ path: `${$route.path}/${url}` }" class="scrapbook-card__link block-link-full" :aria-label="title"></NuxtLink>
     </div>
-
-    <NuxtLink :to="`/scrapbook/${url}`" class="scrapbook-card block-link-full" :aria-label="title"></NuxtLink>
+    
+    <div v-if="tags.length" class="scrapbook-card__tags">
+      <div class="d-flex">
+        <span class="d-inline-block flex-shrink-0 me-2" aria-hidden="true">
+          <IconTag :width="20" :height="20"></IconTag>
+        </span>
+        <ul class="list-unstyled d-flex flex-wrap mb-0" aria-label="Tags">
+          <li v-for="tag in tags" :key="tag.slug" class="me-2">
+            <NuxtLink :to="{ path: `${$route.path}/tags/${tag.scrapbook_tags_slug.slug}` }">{{ tag.scrapbook_tags_slug.name }}</NuxtLink>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,32 +54,75 @@ export default {
       required: false,
       default: null
     },
+    ratio: {
+      type: String,
+      required: false,
+      default: '1-1'
+    },
+    tags: {
+      type: Array,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      ratios: {
+        '1-1': {
+          height: 368,
+          width: 368
+        },
+        '16-9': {
+          height: 207,
+          width: 368
+        },
+        '4-3': {
+          height: 267,
+          width: 368
+        },
+        'v-4-3': {
+          height: 492,
+          width: 369
+        }
+      }
+    }
   },
 
   computed: {
     // eslint-disable-next-line object-shorthand
     imagePath: function () {
       return this.getImagePath(this.image)
+    },
+
+    imageHeight () {
+      return this.ratios[this.ratio].height
+    },
+
+    imageWidth () {
+      return this.ratios[this.ratio].width
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.container-fluid {
-  max-width: 1400px;
-}
-
 .scrapbook-card {
   position: relative;
   font-size: 14px;
   background: $deep-blue;
+  border-radius: 20px;
   color: $white;
+  overflow: hidden;
   width: 100%;
-  
+
+  &:hover,
+  &:focus {
+    img { transform: translate(-50%,-50%) scale(1.0); }
+  }
 
   &__image {
     position: relative;
+    display: block;
     overflow: hidden;
     background: $gray-100 url('~assets/images/loading.svg') no-repeat center center;
 
@@ -80,11 +133,6 @@ export default {
     &--4-3 { padding-top: 75%; }
 
     &--v-4-3 { padding-top: 127%; }
-    
-    &:hover,
-    &:focus {
-        img { transform: translate(-50%,-50%) scale(1.0); }
-    }
 
     img {
       position: absolute;
@@ -105,16 +153,16 @@ export default {
     font-size: 16px; 
   }
 
-  // &__categories {
-  //   border-top: 1px solid $gray-200;
+  &__tags {
+    padding: 0 15px 15px;
+    font-size: 14px;
+    line-height: 1.5;
 
-  //   a {
-  //       color: $pink;
-
-  //       &:hover,
-  //       &:focus,
-  //       &:active { color: $blue; }
-  //   }
-  // }
+    > div {
+      width: 100%;
+      padding-top: 10px;
+      border-top: 1px solid rgba($white, 0.5);
+    }
+  }
 }
 </style>
