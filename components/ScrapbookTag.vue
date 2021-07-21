@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="{ path: `${$route.path}/${slug}` }" class="scrapbook-tag bg--green-teal mb-4">
+  <NuxtLink :to="{ path: `/scrapbook/tags/${slug}` }" class="scrapbook-tag bg--green-teal mb-4">
     <span>
       <slot></slot>
     </span>

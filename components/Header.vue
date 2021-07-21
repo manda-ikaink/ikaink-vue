@@ -9,53 +9,6 @@
           <span class="page-header__logo--right drop-shadow">INK</span>
         </NuxtLink>
       </div>
-
-      <!-- Menu Toggle -->
-      <div class="page-header__nav-toggle">
-        <div class="position-relative">
-          <UiOffcanvasBtn id="navCanvasBtn" class="page-header__nav-btn" target="navCanvas" aria="Navigation">
-            <span></span>
-          </UiOffcanvasBtn>
-        </div>
-      </div>
-
-      <UiOffcanvas id="navCanvas" class="nav-canvas" trigger="navCanvasBtn">
-        <div slot="body">
-          <ul id="nav-main" class="nav">
-            <li class="nav__item">
-              <NuxtLink id="nav-link-0" class="nav__link" to="/about">
-                About
-              </NuxtLink>
-            </li>
-            <li class="nav__item">
-              <NuxtLink id="nav-link-1" class="nav__link" to="/gallery">
-                Gallery
-              </NuxtLink>
-            </li>
-            <li class="nav__item nav__item--active">
-              <NuxtLink id="nav-link-2" class="nav__link" to="/scrapbook">
-                Scrapbook
-              </NuxtLink>
-            </li>
-            <li class="nav__item">
-              <NuxtLink id="nav-link-3" class="nav__link" to="/projects">
-                Projects
-              </NuxtLink>
-            </li>
-            <li class="nav__item">
-              <NuxtLink id="nav-link-4" class="nav__link" to="/contact">
-                Contact
-              </NuxtLink>
-            </li>
-          </ul>
-
-          <div class="nav-panel__links mt-auto">
-		        <div class="mb-3">
-              <SocialMedia></SocialMedia>
-            </div>
-          </div>
-        </div>
-      </UiOffcanvas>
     </div>
   </header>
 </template>
@@ -92,3 +45,84 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import './assets/css/mixins/_gradients.scss';
+
+.page-header {
+  $header-transition: 0.3s ease;
+
+  @include linear-gradient(
+    to bottom, 
+    transparent, 
+    rgba($almost-black, 0.7) 0%, 
+    rgba($almost-black, 0.5) 50%, 
+    rgba($almost-black, 0) 100%);
+	padding: 0.5rem 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+  height: 80px;
+	width: 100%;
+	transition: all $header-transition;
+	z-index: $zindex-fixed;
+
+  @include media-breakpoint-up(md) { 
+    padding: 1rem 0; 
+    height: auto;
+  }
+
+  .scrolled & {
+		@include linear-gradient(
+			to bottom, 
+			transparent, 
+			rgba($almost-black, 0.5) 0%, 
+			rgba($almost-black, 0.5) 50%, 
+			rgba($almost-black, 0.5) 100%);
+    backdrop-filter: blur(5px);
+  }
+
+  &__logo {
+		color: $white;
+		display: inline-block;
+		margin: 0 auto;
+		transition: all $header-transition;
+
+    a,
+    a:hover { text-decoration: none;}
+
+		&--center {
+			display: inline-block;
+			max-width: 40px;
+			height: auto;
+      margin: 0 30px;
+			transition: all $header-transition; 
+
+      @include media-breakpoint-up(md) { max-width: 60px; }
+		}
+
+		&--left,
+		&--right {
+			display: inline-block;
+			padding: 0;
+      margin-right: -12px;
+      font-family: $headings-font-family;
+			font-size: 18px;
+			font-weight: lighter;
+			letter-spacing: 0.75em;
+      line-height: 1;
+			color: $white;
+			transition: all $header-transition;
+			text-shadow: $text-shadow;
+
+			@include media-breakpoint-down(sm) { @include visually-hidden; }
+
+			.scrolled & { opacity: 0; }
+		}
+
+		&--left { order: -1; }
+	}
+}
+</style>

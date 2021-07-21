@@ -1,7 +1,7 @@
 <template>
   <div class="scrapbook-card">
     <div class="position-relative">
-      <picture v-if="image" class="scrapbook-card__image" :class="ratio ? `scrapbook-card__image--${ratio}` : 'scrapbook-card__image--1-1'">
+      <picture v-if="image" class="scrapbook-card__image" :class="ratio ? `ratio--${ratio}` : 'ratio--1-1'">
         <img class="scrapbook-card__img img-fluid w-100 fade-in lazyload" :width="imageWidth" :height="imageHeight" :data-src="`${imagePath}?fit=cover&width=${imageWidth}&height=${imageHeight}`" :title="(image.title ? image.title : null)" :alt="(image.description ? image.description : title)" />
       </picture>
 
@@ -10,7 +10,7 @@
         <p v-if="headline" class="mb-0">{{ headline }}</p>
       </div>
       
-      <NuxtLink :to="{ path: `${$route.path}/${url}` }" class="scrapbook-card__link block-link-full" :aria-label="title"></NuxtLink>
+      <NuxtLink :to="{ path: `/scrapbook/${url}` }" class="scrapbook-card__link block-link-full" :aria-label="title"></NuxtLink>
     </div>
     
     <div v-if="tags.length" class="scrapbook-card__tags">
@@ -20,7 +20,7 @@
         </span>
         <ul class="list-unstyled d-flex flex-wrap mb-0" aria-label="Tags">
           <li v-for="tag in tags" :key="tag.slug" class="me-2">
-            <NuxtLink :to="{ path: `${$route.path}/tags/${tag.scrapbook_tags_slug.slug}` }">{{ tag.scrapbook_tags_slug.name }}</NuxtLink>
+            <NuxtLink :to="{ path: `/scrapbook/tags/${tag.scrapbook_tags_slug.slug}` }">{{ tag.scrapbook_tags_slug.name }}</NuxtLink>
           </li>
         </ul>
       </div>
@@ -125,14 +125,6 @@ export default {
     display: block;
     overflow: hidden;
     background: $gray-100 url('~assets/images/loading.svg') no-repeat center center;
-
-    &--1-1 { padding-top: 100%; }
-
-    &--16-9 { padding-top: 56.25%; }
-
-    &--4-3 { padding-top: 75%; }
-
-    &--v-4-3 { padding-top: 127%; }
 
     img {
       position: absolute;

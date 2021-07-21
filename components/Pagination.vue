@@ -1,17 +1,17 @@
 <template>
   <ul class="pagination justify-content-center flex-wrap">
     <li v-if="meta.prevPage" class="page-item">
-      <NuxtLink class="page-link d-flex align-items-center justify-content-center" :to="{ path: $route.fullPath, query: { page: meta.prevPage }}" aria-label="Previous" rel="prev" @click.prevent="switched(meta.currentPage - 1)">
+      <NuxtLink class="page-link d-flex align-items-center justify-content-center" :to="{ path: $route.fullPath, query: { page: meta.prevPage }}" aria-label="Previous" rel="prev" @click="switched(meta.currentPage - 1)">
         <span aria-hidden="true">&laquo;</span>
       </NuxtLink>
     </li>
 
     <li v-for="page in meta.lastPage" :key="`page-${page}`" class="page-item" :class="{'active': (meta.currentPage === page)}">
-      <NuxtLink :to="{ path: $route.fullPath, query: { page: page }}" class="page-link d-flex align-items-center justify-content-center" @click.prevent="switched(page)">{{ page }}</NuxtLink>
+      <NuxtLink :to="{ path: $route.fullPath, query: { page: page }}" class="page-link d-flex align-items-center justify-content-center" @click="switched(page)">{{ page }}</NuxtLink>
     </li>
 
     <li v-if="meta.nextPage" class="page-item">
-      <NuxtLink class="page-link d-flex align-items-center justify-content-center" :to="{ path: $route.fullPath, query: { page: meta.nextPage }}" aria-label="Next" rel="next" @click.prevent="switched(meta.currentPage + 1)">
+      <NuxtLink class="page-link d-flex align-items-center justify-content-center" :to="{ path: $route.fullPath, query: { page: meta.nextPage }}" aria-label="Next" rel="next" @click="switched(meta.currentPage + 1)">
         <span aria-hidden="true">&raquo;</span>
       </NuxtLink>
     </li>
