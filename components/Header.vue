@@ -58,21 +58,16 @@ export default {
     rgba($almost-black, 0.7) 0%, 
     rgba($almost-black, 0.5) 50%, 
     rgba($almost-black, 0) 100%);
-	padding: 0.5rem 0;
+	padding: 0.7rem 0;
 	position: fixed;
 	top: 0;
 	left: 0;
-	right: 0;
 	text-align: center;
-  height: 80px;
 	width: 100%;
 	transition: all $header-transition;
 	z-index: $zindex-fixed;
 
-  @include media-breakpoint-up(md) { 
-    padding: 1rem 0; 
-    height: auto;
-  }
+  @include media-breakpoint-up(md) { padding: 1rem 0; }
 
   .scrolled & {
 		@include linear-gradient(
@@ -101,6 +96,8 @@ export default {
 			transition: all $header-transition; 
 
       @include media-breakpoint-up(md) { max-width: 60px; }
+
+      @include media-breakpoint-down(sm) { margin: 0 15px; }
 		}
 
 		&--left,
@@ -117,7 +114,9 @@ export default {
 			transition: all $header-transition;
 			text-shadow: $text-shadow;
 
-			@include media-breakpoint-down(sm) { @include visually-hidden; }
+			@include media-breakpoint-down(sm) { 
+        font-size: 14px;
+      }
 
 			.scrolled & { opacity: 0; }
 		}

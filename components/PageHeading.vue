@@ -26,7 +26,9 @@ export default {
 
 <style lang="scss" scoped>
 .page-heading {
-  padding-top: 150px;
+  padding-top: 115px;
   background: $deep-blue;
+
+  @include media-breakpoint-up(md) { padding-top: 150px; }
 }
 </style>

@@ -49,14 +49,19 @@
 
 .nav-toggle {
   position: fixed;
-  top: 0;
+  top: 33px;
   right: 0;
   z-index: 1098;
-  margin: 15px 30px 0;
+  margin: 0 30px;
   padding: 0;
   background: transparent;
   border: 0;
   cursor: pointer;
+
+  @include media-breakpoint-down(md) {
+    top: 24px;
+    margin: 0 15px;
+  }
 
   &:focus {
     outline: 0;
@@ -64,12 +69,20 @@
   }
   
   span {
-    @include burger(40px, 4px, 6px, $white, 2px);
+    @include burger(30px, 3px, 4px, $white, 1px);
     display: block;
+
+    @include media-breakpoint-up(md) {
+      @include burger(40px, 4px, 6px, $white, 2px);
+    }
   }
 
   &.active span {
-    @include burger-to-cross;
+    @include burger-to-cross(auto, 3px, 4px);
+
+    @include media-breakpoint-up(md) {
+      @include burger-to-cross(auto, 4px, 6px);
+    }
   }
 }
 
