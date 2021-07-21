@@ -1,19 +1,18 @@
 <template>
   <div id="__gallery" class="d-flex flex-column flex-auto">
-    <div class="page-heading">
-      <h1 v-if="page.title" class="text-center">{{ page.title }}</h1>
-      <span v-if="page.subtitle" class="text-hr">{{ page.subtitle }}</span>
+    <PageHeading :title="page.title" :subtitle="page.subtitle">
       <div class="d-flex align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
       </div>
-    </div>
+    </PageHeading>
+
     <div class="page-content flex-auto pt-5">
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div v-for="category in categories" :key="category.id" class="col-sm-6 col-lg-4 px-3 mb-4">
             <GalleryCard 
               :name="category.name" 
-              :url="`/gallery/${category.slug}`"
+              :slug="category.slug"
               :image="category.image">
             </GalleryCard>
           </div>

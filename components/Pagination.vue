@@ -41,7 +41,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .pagination {
   .page-item {
     margin-right: 10px;

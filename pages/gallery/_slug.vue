@@ -1,12 +1,11 @@
 <template>
   <div id="__gallery-category">
-    <div class="page-heading">
-      <h1 v-if="page.name" class="text-center">{{ page.name }}</h1>
-      <span v-if="page.subtitle" class="text-hr">{{ page.subtitle }}</span>
+    <PageHeading :title="page.name" :subtitle="page.subtitle">
       <div class="d-flex align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
       </div>
-    </div>
+    </PageHeading>
+
     <div class="page-content pt-5">
       <div class="container-fluid">
         <div class="row justify-content-center">

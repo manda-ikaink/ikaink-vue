@@ -150,18 +150,6 @@ export default {
   }
 }
 
-// .scrapbook-dropdown {
-//   &__toggle {
-//     padding: 5px 7px;
-//     background: $primary;
-//     border: 0;
-//     border-radius: 5px;
-//     color: $deep-blue;
-//     letter-spacing: inherit;
-//     line-height: 1.5;
-//   }
-// }
-
 .masonry-grid {
   transition: opacity 0.8s ease-in;
 

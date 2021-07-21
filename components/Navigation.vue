@@ -44,14 +44,14 @@
   </nav>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './assets/css/mixins/_burger.scss';
 
 .nav-toggle {
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 1098;
   margin: 15px 30px 0;
   padding: 0;
   background: transparent;

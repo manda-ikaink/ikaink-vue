@@ -27,3 +27,30 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@import './assets/css/mixins/_gradients.scss';
+
+.page-footer {
+  @include linear-gradient(
+    to top, 
+    transparent, 
+    rgba($almost-black, 0.4) 0%, 
+    rgba($almost-black, 0.2) 30%, 
+    rgba($almost-black, 0) 100%);
+  font-size: 14px;
+
+  &__copyright {
+    a {
+      color: $white;
+  
+      &:hover,
+      &:focus,
+      &:active {
+        color: $white;
+        text-shadow: 0 0 5px $white;
+      }
+    }
+  }
+}
+</style>

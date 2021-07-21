@@ -66,6 +66,22 @@ img { max-width: 100%; }
   &--v-4-3 { padding-top: 127%; }
 }
 
+.page,
+%page {
+  padding-top: rem(180px);
+  padding-bottom: rem(100px);
+}
+
+.page-content {
+  padding-top: rem(100px);
+  padding-bottom: rem(100px);
+  background-color: $deep-blue;
+
+  &--transparent {
+    background-color: rgba($deep-blue, 0.5);
+  }
+}
+
 // Backgrounds
 .bg-stars {
   &__chart,
@@ -346,21 +362,16 @@ a.external:not(.btn):not(.nav-collapse__link):not(.social-list__link) {
 }
 
 // Lazy Loading
-img.blur-up {
+.blur-up {
   filter: blur(10px);
   transition: filter 0.8s ease-in;
+
+  &.lazyloaded { filter: blur(0); }
 }
 
-img.blur-up.lazyloaded {
-  filter: blur(0);
-}
-
-img.fade-in.lazyloading {
+.fade-in {
   opacity: 0;
-}
-
-img.fade-in.lazyload,
-img.fade-in.lazyloaded {
-  opacity: 1;
   transition: opacity 0.8s ease-in;
+
+  &.lazyloaded { opacity: 1; }
 }

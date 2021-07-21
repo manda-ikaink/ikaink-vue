@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="url" class="gallery-card" :aria-label="name">
+  <div class="gallery-card">
     <div class="gallery-card__placeholder"></div>
     <picture v-if="image">
       <source :data-srcset="`${imagePath}?fit=cover&width=335&height=335`" media="(max-width: 356px)" />
@@ -13,7 +13,9 @@
     <div class="gallery-card__header d-flex align-items-center justify-content-center">
       <span class="gallery-card__name text-display--md mb-0">{{ name }}</span>
     </div>
-  </NuxtLink>
+
+    <NuxtLink :to="{ path: `/gallery/${slug}` }" class="block-link-full" :aria-label="name"></NuxtLink>
+  </div>
 </template>
 
 <script>
@@ -28,7 +30,7 @@ export default {
       type: String,
       required: true
     },
-    url: {
+    slug: {
       type: String,
       required: true
     },
@@ -48,11 +50,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.container-fluid {
-  max-width: 1400px;
-}
-
+<style lang="scss">
 .gallery-card {
   position: relative;
   display: block;
@@ -69,6 +67,18 @@ export default {
   &:hover,
   &:focus {
     @include media-breakpoint-up(lg) { background: $white; }
+
+    .gallery-card__img {
+      @include media-breakpoint-up(lg) { transform: translate(-50%,-50%) scale(1.0); }
+    }
+
+    .gallery-card__header {
+      @include media-breakpoint-up(lg) {
+        background-color: rgba($white, 0.5);
+        color: $almost-black;
+        text-shadow: 0 0 8px $white;
+      }
+    }
   }
 
   &__placeholder {
@@ -88,11 +98,6 @@ export default {
     backface-visibility: hidden;
 
     @include media-breakpoint-up(lg) { transform: translate(-50%,-50%) scale(1.1); }
-
-    .gallery-card:hover &,
-    .gallery-card:focus & {
-      @include media-breakpoint-up(lg) { transform: translate(-50%,-50%) scale(1.0); }
-    }
   }
 
   &__header {
@@ -107,15 +112,6 @@ export default {
     background-color: rgba($almost-black, 0.3);
     transition: all 0.75s cubic-bezier(0.85, 0, 0.15, 1);
     backface-visibility: hidden;
-
-    .gallery-card:hover &,
-    .gallery-card:focus & {
-      @include media-breakpoint-up(lg) {
-        background-color: rgba($white, 0.5);
-        color: $almost-black;
-        text-shadow: 0 0 8px $white;
-      }
-    }
   }
 
   &__name {

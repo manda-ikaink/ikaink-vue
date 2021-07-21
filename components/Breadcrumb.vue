@@ -47,3 +47,28 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.breadcrumbs {
+  padding: .75rem 1rem;
+
+  &__item {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__link {
+    font-size: 12px;
+    color: $white;
+
+    @include media-breakpoint-up(md) { font-size: 14px; }
+  }
+
+  a.breadcrumbs__link {
+    &:hover,
+    &:focus { color: $pink; }
+  }
+}
+</style>
+

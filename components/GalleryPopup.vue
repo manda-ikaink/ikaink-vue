@@ -82,7 +82,9 @@ export default {
 .container {
   max-width: 1200px;
 }
+</style>
 
+<style lang="scss">
 .gallery-popup {
   position: fixed;
   top: 0;

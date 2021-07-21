@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .gallery-entry {
   position: relative;
   display: block;
@@ -86,14 +86,6 @@ export default {
     .gallery-entry:focus-within {
       @include media-breakpoint-up(lg) { transform: scale(1.0); }
     }
-  }
-
-  &__name {
-    // @include media-breakpoint-between(lg,xl) { font-size: 2.75vw; }
-
-    // @include media-breakpoint-between(sm,lg) { font-size: 3.75vw; }
-
-    // @include media-breakpoint-down(sm) { font-size: 6.5vw; }
   }
 }
 </style>

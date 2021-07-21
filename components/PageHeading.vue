@@ -23,3 +23,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.page-heading {
+  padding-top: 150px;
+  background: $deep-blue;
+}
+</style>

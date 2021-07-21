@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .scrapbook-tag {
   position: relative;
   display: inline-block;

@@ -105,7 +105,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .scrapbook-card {
   position: relative;
   font-size: 14px;
@@ -117,7 +117,7 @@ export default {
 
   &:hover,
   &:focus {
-    img { transform: translate(-50%,-50%) scale(1.0); }
+    .scrapbook-card__img { transform: translate(-50%,-50%) scale(1.0); }
   }
 
   &__image {
@@ -125,14 +125,14 @@ export default {
     display: block;
     overflow: hidden;
     background: $gray-100 url('~assets/images/loading.svg') no-repeat center center;
+  }
 
-    img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transition: all 0.5s cubic-bezier(0.85, 0, 0.15, 1);
-      transform: translate(-50%,-50%) scale(1.1);
-    }
+  &__img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: all 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+    transform: translate(-50%,-50%) scale(1.1);
   }
 
   &__content { 
