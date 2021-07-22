@@ -1,5 +1,5 @@
 <template>
-  <ul class="pagination justify-content-center flex-wrap">
+  <ul class="pagination justify-content-center flex-wrap mb-0">
     <li v-if="meta.prevPage" class="page-item">
       <NuxtLink class="page-link d-flex align-items-center justify-content-center" :to="{ path: $route.fullPath, query: { page: meta.prevPage }}" aria-label="Previous" rel="prev" @click="switched(meta.currentPage - 1)">
         <span aria-hidden="true">&laquo;</span>

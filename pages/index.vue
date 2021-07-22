@@ -33,6 +33,8 @@
 
 <script>
 export default {
+  layout: 'home',
+
   async asyncData ({ params, $axios }) {
     const page = await $axios.$get(`https://admin.ika.ink/items/homepage`)
 

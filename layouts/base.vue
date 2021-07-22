@@ -8,7 +8,5 @@
     </main>
 
     <Footer></Footer>
-    
-    <Background :dark="true"></Background>
   </div>
 </template>

@@ -28,6 +28,8 @@
 
 <script>
 export default {
+  layout: 'base',
+  
   async asyncData ({ params, $axios }) {
     const page = await $axios.$get(`https://admin.ika.ink/items/gallery_categories?filter[slug][_eq]=${params.slug}&fields=*.*,entries.*.*.*`)
 

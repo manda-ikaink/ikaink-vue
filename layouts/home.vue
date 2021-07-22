@@ -9,6 +9,6 @@
 
     <Footer></Footer>
     
-    <Background :dark="true"></Background>
+    <Background></Background>
   </div>
 </template>

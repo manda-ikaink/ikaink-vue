@@ -24,6 +24,8 @@
 
 <script>
 export default {
+  layout: 'base',
+  
   async asyncData ({ params, $axios }) {
     const gallery = await $axios.$get(`https://admin.ika.ink/items/gallery`)
     const categories = await $axios.$get(`https://admin.ika.ink/items/gallery_categories?fields=slug,name,subtitle,image.*&sort=sort`)
