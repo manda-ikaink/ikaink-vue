@@ -85,6 +85,8 @@ img { max-width: 100%; }
 // Backgrounds
 .bg,
 %bg {
+  &--trans-dark { background-color: rgba($deep-blue, 0.5); }
+  
   &--blue { background-color: $brand-blue; }
 
   &--indigo { background-color: $brand-indigo; }

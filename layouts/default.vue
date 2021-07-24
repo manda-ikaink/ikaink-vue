@@ -1,5 +1,5 @@
 <template>
-  <div id="__page">
+  <div id="__page" class="bg--trans-dark">
     <Header></Header>
     <Navigation></Navigation>
 
@@ -9,6 +9,6 @@
 
     <Footer></Footer>
     
-    <Background :dark="true"></Background>
+    <Background></Background>
   </div>
 </template>

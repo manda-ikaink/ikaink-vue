@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-stars" :class="{'bg-stars--dark': dark}">
+  <div class="bg-stars">
     <div class="bg-stars__chart"></div>
     <picture>
       <source src="~/assets/images/nebula-vertical-thumbnail.jpg" data-srcset="~/assets/images/nebula-400.jpg" media="(max-width: 356px)" />
@@ -13,32 +13,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    dark: {
-      type: Boolean,
-      default: false
-    }
-  }
-}
-</script>
-
 <style lang="scss">
 .bg-stars {
-  &--dark:after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -9;
-    background-color: rgba($deep-blue, 0.5);
-  }
-
   &__chart,
   &__img {
     display: block;
@@ -49,7 +25,7 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: -10;
     background: no-repeat url('~assets/images/starchart.svg') center center / cover,
   }
@@ -62,7 +38,7 @@ export default {
     height: auto;
     min-width: 100%;
     max-width: none;
-    min-height: 100%;
+    min-height: 100vh;
     z-index: -11;
   }
 }

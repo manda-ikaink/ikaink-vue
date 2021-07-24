@@ -20,7 +20,7 @@
         </span>
         <ul class="list-unstyled d-flex flex-wrap mb-0" aria-label="Tags">
           <li v-for="tag in tags" :key="tag.slug" class="me-2">
-            <NuxtLink :to="{ path: `/scrapbook/tags/${tag.scrapbook_tags_slug.slug}` }">{{ tag.scrapbook_tags_slug.name }}</NuxtLink>
+            <NuxtLink :to="{ path: $route.fullPath, query: { tags: tag.scrapbook_tags_slug.slug, page: undefined }}" @click="filtered(meta.currentPage + 1)">{{ tag.scrapbook_tags_slug.name }}</NuxtLink>
           </li>
         </ul>
       </div>
@@ -100,7 +100,14 @@ export default {
 
     imageWidth () {
       return this.ratios[this.ratio].width
-    }
+    },
+
+  },
+
+  methods: {
+    filtered(tag) {
+      this.$emit('tags:filtered', tag)
+    },
   }
 }
 </script>
