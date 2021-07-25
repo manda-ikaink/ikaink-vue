@@ -5,29 +5,44 @@
         <Breadcrumb></Breadcrumb>
       </div>
 
-      <div class="container-fluid d-flex justify-content-center">
-        <div class="dropdown">
-          <button id="tag-filter-toggle" class="filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            Filters
-          </button>
-          <div class="dropdown-menu" aria-labelledby="tag-filter-toggle">
-            <span class="dropdown-header text-display--xxs">Tag Filters</span>
-            <ul class="scrapbook-filter">
-              <li v-for="tag in tags" :key="`tag-${tag.slug}`" class="scrapbook-filter__item dropdown-item">
-                <div class="form-check">
-                  <input :id="`${tag.slug}-tag-filter`" v-model="checkedTags" class="form-check-input" type="checkbox" :value="tag.slug" @change="tagChange()">
-                  <label :for="`${tag.slug}-tag-filter`" class="form-check-label">{{ tag.name }}</label>
-                </div>
-              </li>
-            </ul>
+      <div class="container-fluid d-flex justify-content-center flex-wrap">
+        <button id="tag-filter-toggle" class="filter-btn dropdown-toggle bg--blue-indigo mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#tag-filters" aria-expanded="false" aria-controls="tag-filters">
+          Filter Posts
+        </button>
+        <button v-if="checkedTags.length" id="tag-filter-toggle" class="filter-btn bg--blue-indigo mb-3 ms-2" type="button" @click="clear()">
+          Clear All
+        </button>
+      </div>
+      <div id="tag-filters" class="collapse bg--green-teal w-100" aria-labelledby="tag-filter-toggle">
+        <div class="container py-3">
+          <span class="filter-text">Filter by tag:</span>
+
+          <ul class="filter-list list-unstyled row px-0 m-0">
+            <li v-for="tag in tags" :key="`tag-${tag.slug}`" class="filter-list__item col-6 col-md-4">
+              <div class="form-check">
+                <label :for="`${tag.slug}-tag-filter`" class="form-check-label d-flex align-items-center"><input :id="`${tag.slug}-tag-filter`" v-model="checkedTags" class="form-check-input me-2" name="tag" type="checkbox" :value="tag.slug" @change="tagChange()"><span class="d-inline-block mt-2">{{ tag.name }}</span></label>
+              </div>
+            </li>
+          </ul>
+
+          <div class="text-end">
+            <a v-if="checkedTags.length" class="filter-text" href="#" @click.prevent="clear()">Clear All</a>
           </div>
         </div>
       </div>
     </PageHeading>
 
     <div class="page-content page-content--transparent d-flex flex-column flex-auto pt-3">
-      <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <Breadcrumb></Breadcrumb>
+      <div v-if="checkedTags.length" id="scrapbook-selected" class="scrapbook-selected container-fluid d-flex flex-wrap align-items-center mb-4">
+        <div class="filter-text me-2">
+          Selected filters:
+        </div>
+        <template v-for="tag in tags">
+          <div v-if="checkedTags.includes(tag.slug)" :key="`tag-selected-${tag.slug}`" class="filter-item form-check me-2">
+            <input :id="`${tag.slug}-tag-selected`" v-model="checkedTags" class="form-check-input" name="selected-tag" type="checkbox" :value="tag.slug" @change="tagChange()">
+            <label :for="`${tag.slug}-tag-selected`" class="form-check-label bg--pink-orange mb-0">{{ tag.name }} <IconClose :width="10" :height="10"></IconClose></label>
+          </div>
+        </template>
       </div>
 
       <div id="scrapbook-meta" class="scrapbook-container scrapbook-container--meta d-flex align-items-center justify-content-between mb-3">
@@ -41,7 +56,7 @@
       
       <div v-if="entries.length" class="scrapbook-container masonry-grid d-flex flex-wrap mb-4" :class="loading ? 'loading' : null" aria-describedby="scrapbook-meta">
         <div v-for="entry in entries" :key="entry.slug" class="masonry-grid__item pb-2">
-          <ScrapbookCard :title="entry.title" :headline="entry.headline" :url="entry.slug" :image="entry.image" :ratio="entry.aspect_ratio" :tags="entry.scrapbook_tags"></ScrapbookCard>
+          <ScrapbookCard :title="entry.title" :headline="entry.headline" :slug="entry.slug" :image="entry.image" :ratio="entry.aspect_ratio" :tags="entry.scrapbook_tags"></ScrapbookCard>
         </div>
       </div>
 
@@ -61,23 +76,21 @@ import Masonry from 'masonry-layout'
 
 export default {
   async asyncData ({ route, $axios }) {
-    const limit = 4
+    const limit = 50
     const query = route.query
     const currentPage = Number(query.page ? query.page : 1)
 
     // Tag & filtering
     const tags = await $axios.$get(`https://admin.ika.ink/items/scrapbook_tags?fields=name,slug,pages.scrapbook_pages_id`)
-    const queryTags = query.tags ? query.tags.split(',') : []
-    const selectedTags = queryTags.length ? getSelectedTags(tags, queryTags) : []
-    const tagIds = selectedTags.length ? getPageIds(selectedTags) : []
-    const checkedTags = formatSelected(selectedTags)
+    const checkedTags = query.tags ? query.tags.split(',') : []
+    const pageIds = checkedTags.length ? getSelectedTags(tags, checkedTags) : []
 
-    let tagQuery = ''
-    if (queryTags.length) tagQuery = tagIds.length ? `&filter[id][_in]=${tagIds}` : '&filter[id][_in]=0'
+    let filterQuery = ''
+    if (checkedTags.length) filterQuery = pageIds.length ? `&filter[id][_in]=${pageIds}` : '&filter[id][_in]=0'
 
     // Data
     const scrapbook = await $axios.$get(`https://admin.ika.ink/items/scrapbook`)
-    const scrapbookPages = await $axios.$get(`https://admin.ika.ink/items/scrapbook_pages?fields=slug,title,headline,aspect_ratio,scrapbook_tags.scrapbook_tags_slug.name,scrapbook_tags.scrapbook_tags_slug.slug,image.*${tagQuery}&sort[]=-date_published&limit=${limit}&page=${currentPage}&meta=*`)
+    const scrapbookPages = await $axios.$get(`https://admin.ika.ink/items/scrapbook_pages?fields=slug,title,headline,aspect_ratio,scrapbook_tags.scrapbook_tags_slug.name,scrapbook_tags.scrapbook_tags_slug.slug,image.*${filterQuery}&sort[]=-date_published&limit=${limit}&page=${currentPage}&meta=*`)
 
     // Meta & Pagination
     const lastPage = (Math.ceil(Number(scrapbookPages.meta.filter_count / limit)) > 1) ? Math.ceil(Number(scrapbookPages.meta.filter_count / limit)) : 1
@@ -94,22 +107,24 @@ export default {
       entries: scrapbookPages.data,
       meta,
       tags: tags.data,
-      // selectedTags,
       checkedTags
     }
-
+    
+    // Pickout data out of full tags list based on if the tag is currently being filtered
+    // Specifically getting associated page IDs per selected tag
     function getSelectedTags($tags, $queryTags) {
       const $selected = []
 
       Object.entries($tags.data).forEach(([key, value], index) => {
         if ($queryTags.includes(value.slug)) {
-          $selected.push({name: value.name, slug: value.slug, pages: value.pages})
+          $selected.push({pages: value.pages})
         }
       })
 
-      return $selected
+      return $selected.length ? getPageIds($selected) : []
     }
 
+    // Pick out page IDs from data and merge into one array w/o duplicates
     function getPageIds($tags) {
       const $ids = []
 
@@ -124,16 +139,6 @@ export default {
       })
       
       return $ids
-    }
-
-    function formatSelected($selectedTags) {
-      const $selected = []
-
-      Object.entries($selectedTags).forEach(([key, value], index) => {
-        $selected.push(value.slug)
-      })
-
-      return $selected
     }
   },
 
@@ -203,11 +208,61 @@ export default {
   max-width: 1400px;
 }
 
-.filter-btn {}
+.container {
+  max-width: 1200px;
+}
 
-.scrapbook-filter {
+.filter-btn {
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  line-height: 1;
+  text-shadow: 0 0 2px $almost-black;
+}
+
+.filter-text {
+  font-family: $headings-font-family;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  color: inherit;
+  text-transform: uppercase;
+}
+
+.filter-list {
   &__item {
+    font-size: 14px;
+    font-weight: bold;
     line-height: 1;
+  }
+}
+
+.filter-item {
+  position: relative;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+
+  label {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 10px;
+    line-height: 1;
+  }
+
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 0;
+    border: 0;
+    opacity: 0;
   }
 }
 

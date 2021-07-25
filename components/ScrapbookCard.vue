@@ -10,7 +10,7 @@
         <p v-if="headline" class="mb-0">{{ headline }}</p>
       </div>
       
-      <NuxtLink :to="{ path: `/scrapbook/${url}` }" class="scrapbook-card__link block-link-full" :aria-label="title"></NuxtLink>
+      <NuxtLink :to="{ path: `/scrapbook/${slug}` }" class="scrapbook-card__link block-link-full" :aria-label="title"></NuxtLink>
     </div>
     
     <div v-if="tags.length" class="scrapbook-card__tags">
@@ -45,7 +45,7 @@ export default {
       required: false,
       default: null
     },
-    url: {
+    slug: {
       type: String,
       required: true
     },

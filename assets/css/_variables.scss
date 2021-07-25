@@ -193,7 +193,7 @@ $dropdown-spacer:                   .125rem !default;
 $dropdown-font-size:                $font-size-base !default;
 $dropdown-color:                    $white !default;
 $dropdown-bg:                       $deep-blue !default;
-$dropdown-border-color:             $deep-blue !default;
+$dropdown-border-color:             none !default;
 $dropdown-border-radius:            20px !default;
 $dropdown-border-width:             1px !default;
 $dropdown-inner-border-radius:      subtract($dropdown-border-radius, $dropdown-border-width) !default;
@@ -255,3 +255,36 @@ $pagination-transition:              color .15s ease-in-out, background-color .1
 
 $pagination-border-radius-sm:       50% !default;
 $pagination-border-radius-lg:       50% !default;
+
+// Forms
+//
+// scss-docs-start form-check-variables
+$form-check-input-width:                  1em !default;
+$form-check-min-height:                   $font-size-base * $line-height-base !default;
+$form-check-padding-start:                $form-check-input-width + .5em !default;
+$form-check-margin-bottom:                .125rem !default;
+$form-check-label-color:                  null !default;
+$form-check-label-cursor:                 null !default;
+$form-check-transition:                   all 0.3s ease !default;
+
+$form-check-input-active-filter:          brightness(90%) !default;
+
+$form-check-input-bg:                     $white !default;
+$form-check-input-border:                 1px solid rgba($almost-black, .3) !default;
+$form-check-input-border-radius:          .25em !default;
+$form-check-radio-border-radius:          50% !default;
+$form-check-input-focus-border:           $primary!default;
+$form-check-input-focus-box-shadow:       none !default;
+
+$form-check-input-checked-color:          $white !default;
+$form-check-input-checked-bg-color:       $brand-pink !default;
+$form-check-input-checked-border-color:   $brand-pink !default;
+$form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>") !default;
+$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$form-check-input-checked-color}'/></svg>") !default;
+
+$form-check-input-disabled-opacity:        .5 !default;
+$form-check-label-disabled-opacity:        0.5!default;
+$form-check-btn-check-disabled-opacity:    0.5 !default;
+
+$form-check-inline-margin-end:    1rem !default;
+// scss-docs-end form-check-variables
