@@ -1,6 +1,6 @@
 <template>
   <nav class="breadcrumbs d-print-none px-0" aria-label="breadcrumbs">
-    <ul class="list-unstyled d-flex flex-wrap mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <ul class="list-unstyled d-flex justify-content-center flex-wrap mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
       <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
         <IconStars></IconStars>
         <NuxtLink to="/" class="breadcrumbs__link" itemprop="item">
@@ -35,7 +35,7 @@ export default {
         const crumb = {}
         
         crumb.path = item[i - 1] ? `/${pathArray[i - 1]}/${item}` : `/${item}`
-        crumb.name = item
+        crumb.name = item.replace(/-/g, ' ')
         crumb.active = (i === length - 1)
 
         crumbs.push(crumb)
@@ -52,7 +52,7 @@ export default {
   padding: .75rem 1rem;
 
   &__item {
-    max-width: 180px;
+    max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
