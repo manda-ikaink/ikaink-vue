@@ -2,7 +2,7 @@
   <div id="__subpage" class="d-flex flex-column flex-auto">
     <PageHero :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <Breadcrumb class="mt-3 mt-lg-5"></Breadcrumb>
+        <Breadcrumb></Breadcrumb>
       </div>
     </PageHero>
 
@@ -18,13 +18,18 @@
 
 <script>
 export default {
-  async asyncData ({ params, $axios }) {
-    const page = await $axios.$get(`https://admin.ika.ink/items/pages?filter[slug][_eq]=${params.slug}&fields=*.*.*`)
-
-    return {
-      slug: params.slug,
-      page: page.data[0],
-    }
+  async asyncData ({ params, $axios, error }) {
+    return await $axios.$get(`https://admin.ika.ink/items/pages?filter[slug][_eq]=${params.slug}&fields=*.*.*`)
+    .then(response => {
+      if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
+      
+      return { 
+        slug: params.slug,
+        page: response.data[0],
+      }
+    }).catch(e => {
+      error(e)
+    })
   },
 
   head() {

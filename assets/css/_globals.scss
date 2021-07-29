@@ -80,7 +80,7 @@ img { max-width: 100%; }
   @extend %no-bottom;
 
   @include media-breakpoint-up(lg) { 
-    padding-top: rem(100px); 
+    padding-top: rem(80px); 
     padding-bottom: rem(60px); 
   }
 

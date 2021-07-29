@@ -23,13 +23,18 @@
 import moment from 'moment';
 
 export default {
-  async asyncData ({ params, $axios }) {
-    const page = await $axios.$get(`https://admin.ika.ink/items/scrapbook_pages?filter[slug][_eq]=${params.slug}&fields=*.*`)
-
-    return {
-      slug: params.slug,
-      page: page.data[0],
-    }
+  async asyncData ({ params, $axios, error }) {
+    return await $axios.$get(`https://admin.ika.ink/items/scrapbook_pages?filter[slug][_eq]=${params.slug}&fields=*.*`)
+    .then(response => {
+      if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
+      
+      return { 
+        slug: params.slug,
+        page: response.data[0],
+      }
+    }).catch(e => {
+      error(e)
+    })
   },
 
   head() {

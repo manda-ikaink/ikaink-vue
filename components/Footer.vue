@@ -9,7 +9,7 @@
         <p class="mb-0 ml-lg-2">©{{ year }} {{ $store.state.websiteTitle }} - All rights reserved.</p>
         <p class="mb-0 ml-lg-2">
           <NuxtLink to="/privacy-policy">Privacy Policy</NuxtLink>&nbsp;|&nbsp;
-          <NuxtLink to="/terms-of-service">Terms of Service</NuxtLink>&nbsp;|&nbsp;
+          <NuxtLink to="/terms-of-use">Terms of Use</NuxtLink>&nbsp;|&nbsp;
           <NuxtLink to="/sitemap">Sitemap</NuxtLink>&nbsp;|&nbsp;
           <NuxtLink to="/credits">Credits</NuxtLink>
         </p>

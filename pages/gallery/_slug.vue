@@ -30,14 +30,19 @@
 export default {
   layout: 'base',
   
-  async asyncData ({ params, $axios }) {
-    const page = await $axios.$get(`https://admin.ika.ink/items/gallery_categories?filter[slug][_eq]=${params.slug}&fields=*.*,entries.*.*.*`)
-
-    return {
-      slug: params.slug,
-      page: page.data[0],
-      entries: page.data[0].entries
-    }
+  async asyncData ({ params, $axios, error }) {
+    return await $axios.$get(`https://admin.ika.ink/items/gallery_categories?filter[slug][_eq]=${params.slug}&fields=*.*,entries.*.*.*`)
+    .then(response => {
+      if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
+      
+      return { 
+        slug: params.slug,
+        page: response.data[0],
+        entries: response.data[0].entries
+      }
+    }).catch(e => {
+      error(e)
+    })
   },
 
   data () {

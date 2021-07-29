@@ -2,7 +2,7 @@
   <div class="page-hero">
     <div class="page-hero__container container text-center pb-3 pb-lg-5">
         <h1 v-if="title" class="page-hero__title mb-3">{{ title }}</h1>
-        <p v-if="subtitle" class="page-hero__subtitle mb-0">{{ subtitle }}</p>
+        <p v-if="subtitle" class="page-hero__subtitle mb-3">{{ subtitle }}</p>
 
         <slot></slot>
     </div>
