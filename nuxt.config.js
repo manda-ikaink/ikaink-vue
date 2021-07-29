@@ -79,6 +79,8 @@ export default {
 
   // Sitemap module configuration: https://sitemap.nuxtjs.org/
   sitemap: {
+    hostname: 'https://ika.ink',
+    gzip: true,
     defaults: {
       changefreq: 'daily',
       priority: 1,
