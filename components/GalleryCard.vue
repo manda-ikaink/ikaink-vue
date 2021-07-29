@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery-card">
+  <div class="gallery-card mb-3">
     <div class="gallery-card__placeholder"></div>
     <picture v-if="image">
       <source :data-srcset="`${imagePath}?fit=cover&width=335&height=335`" media="(max-width: 356px)" />
@@ -56,7 +56,8 @@ export default {
   display: block;
   width: 425px;
   max-width: 100%;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 50%;
   box-shadow: inset 0 0 20px rgba($almost-black, 0.2);
   background: $almost-black;

@@ -1,27 +1,13 @@
 <template>
-  <div id="__projects-page" class="d-flex flex-column flex-auto">
+  <div id="__subpage" class="d-flex flex-column flex-auto">
     <PageHero :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <Breadcrumb></Breadcrumb>
+        <Breadcrumb class="mt-3 mt-lg-5"></Breadcrumb>
       </div>
     </PageHero>
 
     <div class="page-content d-flex flex-column flex-auto">
       <div class="container">
-        <ul v-if="page.type || page.status" class="list-unstyled mb-0">
-          <li v-if="page.status">
-              <span class="font-weight-bold">Status:</span> 
-              <StatusBadge :status="page.project_stage"></StatusBadge>
-          </li>
-          <li v-if="page.type">
-              <span class="font-weight-bold">Type:</span> 
-              <span>{{ page.type }}</span>
-          </li>
-          <li v-if="page.message"><p class="mb-0"><small>Note: {{ page.message }}</small></p></li>                
-        </ul>
-
-        <hr v-if="page.type || page.status || page.message">
-
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-html="page.content">
         </div>
@@ -33,7 +19,7 @@
 <script>
 export default {
   async asyncData ({ params, $axios }) {
-    const page = await $axios.$get(`https://admin.ika.ink/items/project_pages?filter[slug][_eq]=${params.slug}&fields=*.*.*`)
+    const page = await $axios.$get(`https://admin.ika.ink/items/pages?filter[slug][_eq]=${params.slug}&fields=*.*.*`)
 
     return {
       slug: params.slug,

@@ -9,7 +9,7 @@
 
     <div class="home-hero__container container d-flex align-items-center justify-content-center justify-content-lg-start">
       <div class="home-hero__content position-relative">
-        <h1 class="hero-title text-center text-lg-start">
+        <h1 class="home-hero__title text-center text-lg-start">
           <span class="visually-hidden">{{ $store.state.websiteTitle }}: </span>
           <div class="home-hero__hover">
             <div class="position-relative">
@@ -23,8 +23,8 @@
             </div>
           </div>
 
-          <span v-if="page.author" class="hero-subtitle d-block"> by </span>
-          <span v-if="page.author" class="hero-subtitle d-block">Amanda Eldreth</span>
+          <span v-if="page.author" class="home-hero__subtitle d-block"> by </span>
+          <span v-if="page.author" class="home-hero__subtitle d-block">Amanda Eldreth</span>
         </h1>
       </div>
     </div>
@@ -101,6 +101,35 @@ export default {
 			}
 		}
 	}
+
+  &__title {
+    color: inherit;
+		display: block;
+		font-size: 2rem;
+		letter-spacing: .3em;
+    line-height: 1.75;
+		margin-bottom: 0;
+		text-shadow: 3px 3px 5px $deep-blue;
+
+    @include media-breakpoint-up(sm) { font-size: 2.5rem; }
+
+    @include media-breakpoint-up(md) { font-size: 3.5rem; }
+
+    @include media-breakpoint-up(lg) { font-size: 4.5rem; }
+  }
+
+  &__subtitle {
+    color: inherit;
+		display: block;
+		font-family: inherit;
+		font-size: rem(16px);
+		letter-spacing: $letter-spacing-header-lg;
+		line-height: 1.25;
+		margin-bottom: 0;
+		text-shadow: 3px 3px 5px $deep-blue;
+		text-transform: uppercase;
+		max-width: 100%; 
+  }
 
 	a { 
 		display: inline-block;

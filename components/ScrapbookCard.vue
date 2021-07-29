@@ -69,20 +69,20 @@ export default {
     return {
       ratios: {
         '1-1': {
-          height: 368,
-          width: 368
+          height: 400,
+          width: 400
         },
         '16-9': {
-          height: 207,
-          width: 368
+          height: 225,
+          width: 400
         },
         '4-3': {
-          height: 267,
-          width: 368
+          height: 290,
+          width: 400
         },
         'v-4-3': {
-          height: 492,
-          width: 369
+          height: 533,
+          width: 400
         }
       }
     }
@@ -124,7 +124,11 @@ export default {
 
   &:hover,
   &:focus {
-    .scrapbook-card__img { transform: translate(-50%,-50%) scale(1.0); }
+    .scrapbook-card__img { 
+      @include media-breakpoint-up(lg) {
+        transform: translate(-50%,-50%) scale(1.0); 
+      }
+    }
   }
 
   &__image {
@@ -139,7 +143,11 @@ export default {
     top: 50%;
     left: 50%;
     transition: all 0.5s cubic-bezier(0.85, 0, 0.15, 1);
-    transform: translate(-50%,-50%) scale(1.1);
+    transform: translate(-50%,-50%);
+
+    @include media-breakpoint-up(lg) {
+      transform: translate(-50%,-50%) scale(1.1);
+    }
   }
 
   &__content { 

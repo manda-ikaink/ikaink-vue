@@ -24,3 +24,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.offcanvas {
+  transition: transform .8s cubic-bezier(.7,0,.3,1);
+}
+</style>

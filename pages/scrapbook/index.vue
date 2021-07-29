@@ -32,7 +32,7 @@
       </div>
     </PageHeading>
 
-    <div class="page-content page-content--transparent d-flex flex-column flex-auto pt-3">
+    <div class="page-content page-content--transparent d-flex flex-column flex-auto pt-lg-5">
       <div v-if="checkedTags.length" id="scrapbook-selected" class="scrapbook-selected container-fluid d-flex flex-wrap align-items-center mb-4">
         <div class="filter-text me-2">
           Selected filters:
@@ -286,7 +286,7 @@ export default {
 }
 
 .masonry-grid {
-  transition: opacity 0.8s ease-in;
+  transition: opacity 0.3s ease-in;
 
   &__item {
     width: 350px;

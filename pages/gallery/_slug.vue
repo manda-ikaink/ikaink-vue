@@ -6,7 +6,7 @@
       </div>
     </PageHeading>
 
-    <div class="page-content pt-5">
+    <div class="page-content pt-lg-5">
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div v-for="entry in entries" :key="entry.id" class="col-6 col-sm-4 col-lg-3 px-3 mb-4">

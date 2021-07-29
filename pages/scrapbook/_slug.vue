@@ -8,7 +8,7 @@
 
     <div class="page-content d-flex flex-column flex-auto">
       <div class="container">
-        <p v-if="page.headline" class="text-display--xs mb-0">{{ page.headline }}</p>
+        <p v-if="page.headline" class="text-display--xs text-center mb-0">{{ page.headline }}</p>
         <hr v-if="page.headline">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-html="page.content">
@@ -24,7 +24,7 @@ import moment from 'moment';
 
 export default {
   async asyncData ({ params, $axios }) {
-    const page = await $axios.$get(`https://admin.ika.ink/items/scrapbook_pages?filter[slug][_eq]=${params.slug}&fields=*.*.*`)
+    const page = await $axios.$get(`https://admin.ika.ink/items/scrapbook_pages?filter[slug][_eq]=${params.slug}&fields=*.*`)
 
     return {
       slug: params.slug,
@@ -57,7 +57,7 @@ export default {
       } else {
         return `Posted on ${moment(this.page.date_published).format('MMMM DD, YYYY @ hh:mm a')}`
       }
-    }
+    },
   },
 }
 </script>

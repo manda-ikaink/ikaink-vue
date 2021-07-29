@@ -46,12 +46,12 @@ body {
 
 .no-top,
 %no-top {
-  * { margin-top: 0!important;}
+  > * { margin-top: 0!important;}
 }
 
 .no-bottom,
 %no-bottom {
-  * { margin-bottom: 0!important;}
+  > * { margin-bottom: 0!important;}
 }
 
 img { max-width: 100%; }
@@ -73,9 +73,16 @@ img { max-width: 100%; }
 }
 
 .page-content {
-  padding-top: rem(100px);
-  padding-bottom: rem(60px);
+  padding-top: rem(40px);
+  padding-bottom: rem(40px);
   background-color: $deep-blue;
+  @extend %no-top;
+  @extend %no-bottom;
+
+  @include media-breakpoint-up(lg) { 
+    padding-top: rem(100px); 
+    padding-bottom: rem(60px); 
+  }
 
   &--transparent {
     background-color: transparent;
@@ -208,14 +215,16 @@ details,
   // 1a
   // &:focus:not(:focus-visible) {
   //   outline: none !important;
+  //   box-shadow: none!important;
   // }
+  &:focus { box-shadow: none; }
 
   &:focus-visible {
     outline: $focus-outlinewidth $focus-outlinestyle $focus-outlinecolor !important;
     outline-offset: $focus-outlineoffset !important;
   }
 
-  .bg--dark & { outline-color: $focus-outlinecolor-dark; }
+  .bg--dark & { outline-color: $focus-outlinecolor-dark!important; }
 }
 
 [href]:active {
@@ -323,7 +332,7 @@ a.external:not(.btn):not(.nav-collapse__link):not(.social-list__link) {
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.5s cubic-bezier(.7,0,.3,1);
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;

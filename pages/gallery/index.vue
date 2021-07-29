@@ -6,7 +6,7 @@
       </div>
     </PageHeading>
 
-    <div class="page-content flex-auto pt-5">
+    <div class="page-content pt-lg-5 flex-auto">
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div v-for="category in categories" :key="category.id" class="col-sm-6 col-lg-4 px-3 mb-4">
