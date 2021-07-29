@@ -63,6 +63,8 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    // https://sitemap.nuxtjs.org/
+    '@nuxtjs/sitemap',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -72,6 +74,15 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    }
+  },
+
+  // Sitemap module configuration: https://sitemap.nuxtjs.org/
+  sitemap: {
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date()
     }
   },
 

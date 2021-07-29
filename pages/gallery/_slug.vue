@@ -38,7 +38,7 @@ export default {
       return { 
         slug: params.slug,
         page: response.data[0],
-        entries: response.data[0].entries
+        entries: response.data[0] ? response.data[0].entries : null
       }
     }).catch(e => {
       error(e)
