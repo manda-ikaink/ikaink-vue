@@ -16,8 +16,11 @@
       <div class="container">
         <div class="row justify-content-center">
           <div v-if="entry.image" class="gallery-popup__image d-flex align-items-center justify-content-center justify-content-xl-start col-sm-10 col-md-7 col-lg-8 mb-4 mb-lg-0">
-            <figure class="mb-0">
-              <img class="img-fluid fade-in lazyload" src="~/assets/images/loading.svg" :data-src="`${imagePath}?fit=contain&width=700`" :title="(entry.image.title ? entry.image.title : null)" :alt="(entry.image.description ? entry.image.description : entry.name)" />
+            <figure class="mb-0 no-bottom">
+              <img class="img-fluid fade-in mb-3 lazyload" src="~/assets/images/loading.svg" :data-src="`${imagePath}?fit=contain&width=700`" :title="(entry.image.title ? entry.image.title : null)" :alt="(entry.image.description ? entry.image.description : entry.name)" />
+              <template v-if="entry.images.length">
+                <img v-for="img in entry.images" :key="img.directus_files_id.id" class="img-fluid fade-in mb-3 lazyload" src="~/assets/images/loading.svg" :data-src="`${getImagePath(img.directus_files_id)}?fit=contain&width=700`" :title="(img.directus_files_id.title ? img.directus_files_id.title : null)" :alt="(img.directus_files_id.description ? img.directus_files_id.description : entry.name)" />
+              </template>
             </figure>
           </div>
           <div class="gallery-popup__content col-md-5 col-lg-4">

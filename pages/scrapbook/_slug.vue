@@ -39,7 +39,7 @@ export default {
 
   head() {
     return {
-      title: this.page.meta_title,
+      title: this.page.meta_title ? this.page.meta_title : `${this.page.title} - IKA ink`,
       meta: [
         { hid: 'description', name: 'description', content: this.page.meta_description },
       ],

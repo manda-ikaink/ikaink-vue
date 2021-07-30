@@ -120,7 +120,7 @@ export default {
 
   // PurgeCSS plugin for nuxt: https://purgecss.com/guides/nuxt.html
   purgeCSS: {
-    whitelist: ['body', 'html', 'nuxt-progress', 'show', 'fade', 'active', 'collapse', 'hide', 'close', 'collapse', 'collapsing', 'modal-backdrop', 'field-message', 'form-message', 'invalid-feedback', 'was-validated'],
-    whitelistPatterns: [/^ratio/],
+    whitelist: ['body', 'html', 'nuxt-progress', 'show', 'fade', 'active', 'collapse', 'hide', 'close', 'collapse', 'collapsing', 'modal-backdrop', 'field-message', 'form-message', 'invalid-feedback', 'was-validated', 'no-top', 'no-bottom'],
+    whitelistPatterns: [/^ratio/, /^mb-/, /^mt-/, /^ms-/,/^me-/],
   },
 }

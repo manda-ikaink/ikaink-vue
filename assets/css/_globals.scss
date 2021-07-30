@@ -46,12 +46,12 @@ body {
 
 .no-top,
 %no-top {
-  > * { margin-top: 0!important;}
+  > *:last-child { margin-top: 0!important;}
 }
 
 .no-bottom,
 %no-bottom {
-  > * { margin-bottom: 0!important;}
+  > *:last-child { margin-bottom: 0!important;}
 }
 
 img { max-width: 100%; }

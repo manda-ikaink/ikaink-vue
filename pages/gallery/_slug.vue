@@ -14,6 +14,7 @@
               :id="entry.gallery_entries_id.id"
               :name="entry.gallery_entries_id.name" 
               :image="entry.gallery_entries_id.image"
+              :images="entry.gallery_entries_id.images"
               @show-gallery="showGallery">
             </GalleryEntry>
           </div>
@@ -62,7 +63,7 @@ export default {
 
   methods: {
     async showGallery(id) {
-      const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries/${id}?fields=name,image.*,year,tools,size,link,description`)
+      const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries/${id}?fields=name,image.*,images.directus_files_id.*,year,tools,size,link,description`)
       this.activeEntry = item.data
       document.body.style.overflow = 'hidden'
       document.body.style.paddingRight = '0px'
