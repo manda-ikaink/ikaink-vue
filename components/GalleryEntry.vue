@@ -6,7 +6,7 @@
 
     <span class="gallery-entry__name d-block text-center text-display--xxs mb-0">{{ name }}</span>
 
-    <a :id="`entryLink${id}`" :ref="`entryLink${id}`" :href="`#${id}`" class="block-link-full" :aria-label="`View ${name}`" @click.prevent="triggerEvent(id)"></a>
+    <NuxtLink :id="`entryLink${id}`" :ref="`entryLink${id}`" :to="url" class="block-link-full" :aria-label="`View ${name}`" @click.native="$emit('show-gallery', slug)"></NuxtLink>
   </div>
 </template>
 
@@ -31,18 +31,20 @@ export default {
       required: false,
       default: null
     },
+    slug: {
+      type: String,
+      required: true
+    },
+    url: {
+      type: String,
+      required: true
+    }
   },
 
   computed: {
     // eslint-disable-next-line object-shorthand
     imagePath: function () {
       return this.getImagePath(this.image)
-    }
-  },
-
-  methods: {
-    triggerEvent(id) {
-      this.$emit('show-gallery', id)
     }
   }
 }

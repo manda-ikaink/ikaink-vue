@@ -1,7 +1,7 @@
 <template>
   <div v-if="entry" ref="popup" class="gallery-popup d-flex flex-column" tab-index="-1">
     <div class="container-fluid position-relative">
-      <button class="gallery-popup__close" aria-label="Close" @click="close">
+      <button ref="closebtn" class="gallery-popup__close" aria-label="Close" @click="close">
         <IconClose :height="30" :width="30"></IconClose>
       </button>
     </div>
@@ -14,16 +14,16 @@
 
     <div class="gallery-popup__body overflow-auto">
       <div class="container">
-        <div class="row justify-content-center">
-          <div v-if="entry.image" class="gallery-popup__image d-flex align-items-center justify-content-center justify-content-xl-start col-sm-10 col-md-7 col-lg-8 mb-4 mb-lg-0">
-            <figure class="mb-0 no-bottom">
-              <img class="img-fluid fade-in mb-3 lazyload" src="~/assets/images/loading.svg" :data-src="`${imagePath}?fit=contain&width=700`" :title="(entry.image.title ? entry.image.title : null)" :alt="(entry.image.description ? entry.image.description : entry.name)" />
+        <div class="d-lg-flex justify-content-center">
+          <div v-if="entry.image" class="gallery-popup__image mb-4 mb-lg-0">
+            <figure class="text-center mb-0 no-bottom">
+              <img class="img-fluid fade-in mb-3 lazyload" src="~/assets/images/loading.svg" :data-src="`${imagePath}?fit=contain&width=1000`" :title="(entry.image.title ? entry.image.title : null)" :alt="(entry.image.description ? entry.image.description : entry.name)" />
               <template v-if="entry.images.length">
-                <img v-for="img in entry.images" :key="img.directus_files_id.id" class="img-fluid fade-in mb-3 lazyload" src="~/assets/images/loading.svg" :data-src="`${getImagePath(img.directus_files_id)}?fit=contain&width=700`" :title="(img.directus_files_id.title ? img.directus_files_id.title : null)" :alt="(img.directus_files_id.description ? img.directus_files_id.description : entry.name)" />
+                <img v-for="img in entry.images" :key="img.directus_files_id.id" class="img-fluid fade-in mb-3 lazyload" src="~/assets/images/loading.svg" :data-src="`${getImagePath(img.directus_files_id)}?fit=contain&width=1000`" :title="(img.directus_files_id.title ? img.directus_files_id.title : null)" :alt="(img.directus_files_id.description ? img.directus_files_id.description : entry.name)" />
               </template>
             </figure>
           </div>
-          <div class="gallery-popup__content col-md-5 col-lg-4">
+          <div class="gallery-popup__content">
             <div class="position-relative h-100">
               <div class="gallery-popup__sticky sticky-md-top">
                 <ul class="list-unstyled">
@@ -54,7 +54,7 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import getImagePath from '../mixins/getImagePath.js'
+import getImagePath from '../../../mixins/getImagePath.js'
 
 export default {
   mixins: [getImagePath],
@@ -73,6 +73,10 @@ export default {
     }
   },
 
+  mounted() {
+    this.$refs.closebtn.focus()
+  },
+
   methods: {
     close() {
       this.$emit('close-gallery')
@@ -83,7 +87,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  max-width: 1200px;
+  max-width: 1600px;
 }
 </style>
 
@@ -145,6 +149,10 @@ export default {
     padding-top: 30px;
     padding-bottom: 30px;
 
+    @include media-breakpoint-up(lg) {
+      flex: 1 1 auto;
+    }
+
     img { 
       pointer-events: none;
       border-radius: 30px; 
@@ -152,8 +160,11 @@ export default {
   }
 
   &__content {
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       padding-left: 30px;
+      flex: 0 0 300px;
+      width: 300px;
+      flex-shrink: 0;
     }
   }
 
@@ -163,7 +174,7 @@ export default {
     height: calc(100vh - 60px);
     overflow-y: auto;
 
-     @include media-breakpoint-up(md) {
+     @include media-breakpoint-up(lg) {
       height: calc(100vh - 90px);
     }
   }

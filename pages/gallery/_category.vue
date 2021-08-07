@@ -15,14 +15,17 @@
               :name="entry.gallery_entries_id.name" 
               :image="entry.gallery_entries_id.image"
               :images="entry.gallery_entries_id.images"
+              :slug="entry.gallery_entries_id.slug"
+              :url="`/gallery/${slug}/${entry.gallery_entries_id.slug}`"
               @show-gallery="showGallery">
             </GalleryEntry>
           </div>
         </div>
       </div>
     </div>
+
     <transition name="fadeup">
-      <GalleryPopup v-if="activeEntry" :entry="activeEntry" @close-gallery="hideGallery"></GalleryPopup>
+      <NuxtChild v-if="activeEntry" :entry="activeEntry" @close-gallery="hideGallery"></NuxtChild>
     </transition>
   </div>
 </template>
@@ -32,12 +35,12 @@ export default {
   layout: 'base',
   
   async asyncData ({ params, $axios, error }) {
-    return await $axios.$get(`https://admin.ika.ink/items/gallery_categories?filter[slug][_eq]=${params.slug}&fields=*.*,entries.*.*.*`)
+    return await $axios.$get(`https://admin.ika.ink/items/gallery_categories?filter[slug][_eq]=${params.category}&fields=*.*,entries.*.*.*`)
     .then(response => {
       if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
       
       return { 
-        slug: params.slug,
+        slug: params.category,
         page: response.data[0],
         entries: response.data[0] ? response.data[0].entries : null
       }
@@ -48,7 +51,7 @@ export default {
 
   data () {
     return {
-      activeEntry: null
+      activeEntry: null,
     }
   },
 
@@ -61,10 +64,30 @@ export default {
     }
   },
 
+  computed: {
+    showModal() {
+      return this.$route.matched.length;
+    }
+  },
+
+  watch: {
+    $route() {
+      if (!this.$route.params.entry) {
+        this.hideGallery()
+      } else {
+        this.showGallery(this.$route.params.entry)
+      }
+    },
+  },
+
+  mounted() {
+    if (this.$route.params.entry) this.showGallery(this.$route.params.entry)
+  },
+
   methods: {
-    async showGallery(id) {
-      const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries/${id}?fields=name,image.*,images.directus_files_id.*,year,tools,size,link,description`)
-      this.activeEntry = item.data
+    async showGallery(slug) {
+      const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries?filter[slug][_eq]=${slug}&fields=name,image.*,images.directus_files_id.*,year,tools,size,link,description`)
+      this.activeEntry = item.data ? item.data[0] : null
       document.body.style.overflow = 'hidden'
       document.body.style.paddingRight = '0px'
     },
@@ -73,6 +96,7 @@ export default {
       this.activeEntry = null
       document.body.style.overflow = ''
       document.body.style.paddingRight = ''
+      this.$router.push({ params: { entry: undefined } })
     }
   }
 }
