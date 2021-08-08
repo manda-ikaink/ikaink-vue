@@ -1,5 +1,11 @@
 <template>
   <div id="__scrapbook" class="d-flex flex-column flex-auto">
+    <SocialHead
+      :title="page.og_title || page.title"
+      :description="page.og_description || page.meta_description"
+      :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}` : null"
+    />
+    
     <PageHeading :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
@@ -75,13 +81,13 @@
 import Masonry from 'masonry-layout'
 
 export default {
-  async asyncData ({ route, $axios }) {
+  async asyncData ({ route, $axios, $config }) {
     const limit = 50
     const query = route.query
     const currentPage = Number(query.page ? query.page : 1)
 
     // Tag & filtering
-    const tags = await $axios.$get(`https://admin.ika.ink/items/scrapbook_tags?fields=name,slug,pages.scrapbook_pages_id`)
+    const tags = await $axios.$get(`${$config.apiRoute}/items/scrapbook_tags?fields=name,slug,pages.scrapbook_pages_id`)
     const checkedTags = query.tags ? query.tags.split(',') : []
     const pageIds = checkedTags.length ? getSelectedTags(tags, checkedTags) : []
 
@@ -89,8 +95,8 @@ export default {
     if (checkedTags.length) filterQuery = pageIds.length ? `&filter[id][_in]=${pageIds}` : '&filter[id][_in]=0'
 
     // Data
-    const scrapbook = await $axios.$get(`https://admin.ika.ink/items/scrapbook`)
-    const scrapbookPages = await $axios.$get(`https://admin.ika.ink/items/scrapbook_pages?fields=slug,title,headline,aspect_ratio,scrapbook_tags.scrapbook_tags_slug.name,scrapbook_tags.scrapbook_tags_slug.slug,image.*${filterQuery}&sort[]=-date_published&limit=${limit}&page=${currentPage}&meta=*`)
+    const scrapbook = await $axios.$get(`${$config.apiRoute}/items/scrapbook`)
+    const scrapbookPages = await $axios.$get(`${$config.apiRoute}/items/scrapbook_pages?fields=slug,title,headline,aspect_ratio,scrapbook_tags.scrapbook_tags_slug.name,scrapbook_tags.scrapbook_tags_slug.slug,image.*${filterQuery}&sort[]=-date_published&limit=${limit}&page=${currentPage}&meta=*`)
 
     // Meta & Pagination
     const lastPage = (Math.ceil(Number(scrapbookPages.meta.filter_count / limit)) > 1) ? Math.ceil(Number(scrapbookPages.meta.filter_count / limit)) : 1
@@ -150,10 +156,10 @@ export default {
 
   head() {
     return {
-      title: this.page.meta_title,
+      title: this.page.meta_title ? this.page.meta_title : `${this.page.title} - ${this.$config.websiteTitle}`,
       meta: [
         { hid: 'description', name: 'description', content: this.page.meta_description },
-      ]
+      ],
     }
   },
 

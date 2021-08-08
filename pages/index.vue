@@ -1,5 +1,10 @@
 <template>
   <div class="home-hero d-flex align-items-center justify-content-center">
+    <SocialHead
+      :title="page.og_title || page.meta_title"
+      :description="page.og_description || page.meta_description"
+      :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}` : null"
+    />
     <!-- Star Objects -->
     <div class="star-object">
       <div class="star-object__star"></div>
@@ -10,21 +15,19 @@
     <div class="home-hero__container container d-flex align-items-center justify-content-center justify-content-lg-start">
       <div class="home-hero__content position-relative">
         <h1 class="home-hero__title text-center text-lg-start">
-          <span class="visually-hidden">{{ $store.state.websiteTitle }}: </span>
+          <span class="visually-hidden">{{ $config.websiteTitle }}: </span>
           <div class="home-hero__hover">
-            <div class="position-relative">
-              <NuxtLink title="View Gallery of Art &amp; Illustrations " to="/gallery">Art, <span></span></NuxtLink>
-            </div>
-            <div class="position-relative">
-              <NuxtLink title="View Scrapbook of Notes, Pictures &amp; Updates" to="/scrapbook">Notes, <span></span></NuxtLink>
-            </div>
-            <div class="position-relative">
-              <NuxtLink title="View Development &amp; Coding Projects" to="/projects">Projects <span></span></NuxtLink>
+            <div v-for="link in page.links" :key="link.name" class="position-relative">
+              <NuxtLink :to="link.url" :target="link.target" :title="link.tool_tip ? link.tool_tip : null">
+                {{ link.name }}
+              </NuxtLink>
             </div>
           </div>
 
           <span v-if="page.author" class="home-hero__subtitle d-block"> by </span>
-          <span v-if="page.author" class="home-hero__subtitle d-block">Amanda Eldreth</span>
+          <NuxtLink :to="page.author_link" class="d-block">
+            <span v-if="page.author" class="home-hero__subtitle d-block">{{ page.author }}</span>
+          </NuxtLink>
         </h1>
       </div>
     </div>
@@ -35,8 +38,8 @@
 export default {
   layout: 'home',
 
-  async asyncData ({ params, $axios }) {
-    const page = await $axios.$get(`https://admin.ika.ink/items/homepage`)
+  async asyncData ({ params, $axios, $config }) {
+    const page = await $axios.$get(`${$config.apiRoute}/items/homepage`)
 
     return {
       slug: params.slug,
@@ -46,12 +49,12 @@ export default {
 
   head() {
     return {
-      title: this.page.meta_title,
+      title: this.title,
       meta: [
-        { hid: 'description', name: 'description', content: this.page.meta_description },
-      ],
+        { hid: 'description', name: 'description', content: this.description }
+      ]
     }
-  }
+  },
 }
 </script>
 

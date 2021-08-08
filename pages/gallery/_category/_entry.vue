@@ -112,7 +112,7 @@ export default {
 
   methods: {
     open () {
-      return this.$axios.$get(`https://admin.ika.ink/items/gallery_entries?filter[slug][_eq]=${this.slug}&fields=name,image.*,images.directus_files_id.*,year,tools,size,link,description`)
+      return this.$axios.$get(`${this.$config.apiRoute}/items/gallery_entries?filter[slug][_eq]=${this.slug}&fields=name,image.*,images.directus_files_id.*,year,tools,size,link,description`)
       .then(response => {
         this.entry = response.data[0]
         this.disableScroll()

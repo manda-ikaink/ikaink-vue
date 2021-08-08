@@ -1,5 +1,11 @@
 <template>
   <div id="__gallery-category">
+    <SocialHead
+      :title="page.og_title || page.title"
+      :description="page.og_description || page.meta_description"
+      :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}` : null"
+    />
+
     <PageHeading :title="page.name" :subtitle="page.subtitle">
       <div class="d-flex align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
@@ -34,8 +40,8 @@
 export default {
   layout: 'base',
   
-  async asyncData ({ params, $axios, error }) {
-    return await $axios.$get(`https://admin.ika.ink/items/gallery_categories?filter[slug][_eq]=${params.category}&fields=*.*,entries.*.*.*`)
+  async asyncData ({ params, $axios, error, $config }) {
+    return await $axios.$get(`${$config.apiRoute}/items/gallery_categories?filter[slug][_eq]=${params.category}&fields=*.*,entries.*.*.*`)
     .then(response => {
       if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
       
@@ -57,7 +63,7 @@ export default {
 
   head() {
     return {
-      title: this.page.meta_title,
+      title: this.page.meta_title ? this.page.meta_title : `Gallery: ${this.page.name} - ${this.$config.websiteTitle}`,
       meta: [
         { hid: 'description', name: 'description', content: this.page.meta_description },
       ],

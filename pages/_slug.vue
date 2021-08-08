@@ -1,5 +1,11 @@
 <template>
   <div id="__subpage" class="d-flex flex-column flex-auto">
+    <SocialHead
+      :title="page.og_title || page.title"
+      :description="page.og_description || page.meta_description"
+      :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}` : null"
+    />
+
     <PageHero :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
@@ -18,8 +24,8 @@
 
 <script>
 export default {
-  async asyncData ({ params, $axios, error }) {
-    return await $axios.$get(`https://admin.ika.ink/items/pages?filter[slug][_eq]=${params.slug}&fields=*.*.*`)
+  async asyncData ({ params, $axios, $config, error }) {
+    return await $axios.$get(`${$config.apiRoute}/items/pages?filter[slug][_eq]=${params.slug}&fields=*.*.*`)
     .then(response => {
       if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
       
@@ -34,7 +40,7 @@ export default {
 
   head() {
     return {
-      title: this.page.meta_title,
+      title: this.page.meta_title ? this.page.meta_title : `${this.page.title} - ${this.$config.websiteTitle}`,
       meta: [
         { hid: 'description', name: 'description', content: this.page.meta_description },
       ],

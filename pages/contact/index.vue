@@ -1,5 +1,11 @@
 <template>
   <div id="__subpage" class="d-flex flex-column flex-auto">
+    <SocialHead
+      :title="page.og_title || page.title"
+      :description="page.og_description || page.meta_description"
+      :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}` : null"
+    />
+
     <PageHero v-if="page" :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
         <Breadcrumb class="mt-3 mt-lg-5"></Breadcrumb>
@@ -131,8 +137,8 @@
 
 <script>
 export default {
-  async asyncData ({ params, $axios }) {
-    const page = await $axios.$get(`https://admin.ika.ink/items/pages?filter[slug][_eq]=contact&fields=*.*.*`)
+  async asyncData ({ params, $axios, $config }) {
+    const page = await $axios.$get(`${$config.apiRoute}/items/pages?filter[slug][_eq]=contact&fields=*.*.*`)
 
     return {
       slug: params.slug,
@@ -160,9 +166,9 @@ export default {
 
   head() {
     return {
-      title: this.page ? this.page.meta_title : 'Contact',
+      title: this.page.meta_title ? this.page.meta_title : `Contact - ${this.$config.websiteTitle}`,
       meta: [
-        { hid: 'description', name: 'description', content: this.page.meta_description ? this.page.meta_descrption : '' },
+        { hid: 'description', name: 'description', content: this.page.meta_description  },
       ],
     }
   },
@@ -214,7 +220,7 @@ export default {
 
       if(this.notBot) {
         this.$axios
-          .post('https://admin.ika.ink/items/contact', {
+          .post(`${this.$config.apiRoute}/items/contact`, {
             name: this.name,
             email: this.email,
             subject: this.subject,

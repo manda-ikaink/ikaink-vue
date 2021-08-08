@@ -1,5 +1,11 @@
 <template>
   <div id="__projects" class="d-flex flex-column flex-auto">
+    <SocialHead
+      :title="page.og_title || page.title"
+      :description="page.og_description || page.meta_description"
+      :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}` : null"
+    />
+
     <PageHeading :title="page.title" :subtitle="page.subtitle">
       <div class="d-flex align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
@@ -16,9 +22,9 @@
 
 <script>
 export default {
-  async asyncData ({ params, $axios }) {
-    const project = await $axios.$get(`https://admin.ika.ink/items/projects`)
-    const projects = await $axios.$get(`https://admin.ika.ink/items/project_pages?fields=*.*&sort=sort`)
+  async asyncData ({ params, $axios, $config }) {
+    const project = await $axios.$get(`${$config.apiRoute}/items/projects`)
+    const projects = await $axios.$get(`${$config.apiRoute}/items/project_pages?fields=*.*&sort=sort`)
 
     return {
       slug: params.slug,
@@ -29,7 +35,7 @@ export default {
 
   head() {
     return {
-      title: this.page.meta_title,
+      title: this.page.meta_title ? this.page.meta_title : `${this.page.title} - ${this.$config.websiteTitle}`,
       meta: [
         { hid: 'description', name: 'description', content: this.page.meta_description },
       ],

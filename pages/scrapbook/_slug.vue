@@ -1,5 +1,11 @@
 <template>
   <div id="__scrapbook-page" class="d-flex flex-column flex-auto">
+    <SocialHead
+      :title="page.og_title || page.title"
+      :description="page.og_description || page.meta_description"
+      :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}` : null"
+    />
+    
     <PageHero :title="page.title" :subtitle="date">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
@@ -23,8 +29,8 @@
 import moment from 'moment';
 
 export default {
-  async asyncData ({ params, $axios, error }) {
-    return await $axios.$get(`https://admin.ika.ink/items/scrapbook_pages?filter[slug][_eq]=${params.slug}&fields=*.*`)
+  async asyncData ({ params, $axios, error, $config }) {
+    return await $axios.$get(`${$config.apiRoute}/items/scrapbook_pages?filter[slug][_eq]=${params.slug}&fields=*.*`)
     .then(response => {
       if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
       
@@ -39,7 +45,7 @@ export default {
 
   head() {
     return {
-      title: this.page.meta_title ? this.page.meta_title : `${this.page.title} - IKA ink`,
+      title: this.page.meta_title ? this.page.meta_title : `${this.page.title} - ${this.$config.websiteTitle}`,
       meta: [
         { hid: 'description', name: 'description', content: this.page.meta_description },
       ],

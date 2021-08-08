@@ -5,6 +5,12 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || 'https://ika.ink',
+    apiRoute: 'https://admin.ika.ink',
+    websiteTitle: 'IKA ink'
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'IKA ink',
@@ -12,7 +18,32 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Projects, paintings, web development and everything in-between by Amanda Eldreth' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+      {
+        hid: 'twitter:title',
+        name: 'twitter:title',
+        content: 'IKA ink'
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content: 'Art, notes and projects by Amanda Eldreth'
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'IKA ink'
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: 'Art, notes and projects by Amanda Eldreth'
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'IKA ink'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -121,6 +152,6 @@ export default {
   // PurgeCSS plugin for nuxt: https://purgecss.com/guides/nuxt.html
   purgeCSS: {
     whitelist: ['body', 'html', 'nuxt-progress', 'show', 'fade', 'active', 'collapse', 'hide', 'close', 'collapse', 'collapsing', 'modal-backdrop', 'field-message', 'form-message', 'invalid-feedback', 'was-validated', 'no-top', 'no-bottom'],
-    whitelistPatterns: [/^ratio/, /^mb-/, /^mt-/, /^ms-/,/^me-/],
+    whitelistPatterns: [/^ratio/, /^d-/, /^mb-/, /^mt-/, /^ms-/,/^me-/, /^status-badge/],
   },
 }

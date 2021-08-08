@@ -4,7 +4,7 @@
       <!-- Logo -->
       <div class="page-header__logo">
         <NuxtLink to="/" class="d-flex align-items-center justify-content-center">
-          <img class="page-header__logo--center svg drop-shadow" src="~assets/images/ika-ink-large-white.svg" alt="ika INK Logo" :title="$store.state.websiteTitle">
+          <img class="page-header__logo--center svg drop-shadow" src="~assets/images/ika-ink-large-white.svg" alt="ika INK Logo" :title="$config.websiteTitle">
           <span class="page-header__logo--left drop-shadow">ika</span>
           <span class="page-header__logo--right drop-shadow">INK</span>
         </NuxtLink>
