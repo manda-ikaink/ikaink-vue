@@ -340,15 +340,17 @@ a.external:not(.btn):not(.nav-collapse__link):not(.social-list__link) {
 
 .fadeup-enter-active,
 .fadeup-leave-active {
-  transition: all 0.8s cubic-bezier(.7,0,.3,1);
   filter: blur(0);
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(.7,0,.3,1);
 }
 
 .fadeup-enter,
 .fadeup-leave-to {
   filter: blur(10px);
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(40px)!important;
   transition: all 0.5s cubic-bezier(.7,0,.3,1);
 }
 

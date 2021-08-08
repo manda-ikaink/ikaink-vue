@@ -6,7 +6,7 @@
       </div>
     </PageHeading>
 
-    <div class="page-content pt-lg-5">
+    <div id="gallery-list" class="page-content pt-lg-5" tabindex="-1">
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div v-for="entry in entries" :key="entry.id" class="col-6 col-sm-4 col-lg-3 px-3 mb-4">
@@ -25,7 +25,7 @@
     </div>
 
     <transition name="fadeup">
-      <NuxtChild v-if="activeEntry" :entry="activeEntry" @close-gallery="hideGallery"></NuxtChild>
+      <NuxtChild v-if="modalActive" :active="modalActive" :focus-element="focusElement" @close-gallery="hideGallery"></NuxtChild>
     </transition>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default {
 
   data () {
     return {
-      activeEntry: null,
+      modalActive: false
     }
   },
 
@@ -65,8 +65,8 @@ export default {
   },
 
   computed: {
-    showModal() {
-      return this.$route.matched.length;
+    focusElement() {
+      return this.$store.state.gallery.active ? this.$store.state.gallery.active : 'gallery-list'
     }
   },
 
@@ -75,28 +75,22 @@ export default {
       if (!this.$route.params.entry) {
         this.hideGallery()
       } else {
-        this.showGallery(this.$route.params.entry)
+        this.showGallery()
       }
     },
   },
 
   mounted() {
-    if (this.$route.params.entry) this.showGallery(this.$route.params.entry)
+    if (this.$route.params.entry) this.showGallery()
   },
 
   methods: {
-    async showGallery(slug) {
-      const item = await this.$axios.$get(`https://admin.ika.ink/items/gallery_entries?filter[slug][_eq]=${slug}&fields=name,image.*,images.directus_files_id.*,year,tools,size,link,description`)
-      this.activeEntry = item.data ? item.data[0] : null
-      document.body.style.overflow = 'hidden'
-      document.body.style.paddingRight = '0px'
+    showGallery() {
+      this.modalActive = true
     },
 
     hideGallery() {
-      this.activeEntry = null
-      document.body.style.overflow = ''
-      document.body.style.paddingRight = ''
-      this.$router.push({ params: { entry: undefined } })
+      this.modalActive = false
     }
   }
 }

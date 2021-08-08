@@ -1,5 +1,5 @@
 <template>
-  <div v-if="entry" ref="popup" class="gallery-popup d-flex flex-column" tab-index="-1">
+  <div v-if="active && entry" ref="popup" class="gallery-popup d-flex flex-column" tab-index="-1">
     <div class="container-fluid position-relative">
       <button ref="closebtn" class="gallery-popup__close" aria-label="Close" @click="close">
         <IconClose :height="30" :width="30"></IconClose>
@@ -53,16 +53,28 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 import getImagePath from '../../../mixins/getImagePath.js'
+import focusFirst from '../../../mixins/focusFirst.js'
+import focusTrap from '../../../mixins/focusTrap.js'
 
 export default {
-  mixins: [getImagePath],
+  mixins: [getImagePath, focusFirst, focusTrap],
 
   props: {
-    entry: {
-      type: [Object, null],
-      required: true
+    active: {
+      type: Boolean,
+      require: true,
+    },
+    focusElement: {
+      type: String,
+      default: null,
+    },
+  },
+
+  data() {
+    return {
+      slug: this.$route.params.entry,
+      entry: null
     }
   },
 
@@ -72,15 +84,68 @@ export default {
       return this.getImagePath(this.entry.image)
     }
   },
-
+  
   mounted() {
-    this.$refs.closebtn.focus()
+    if (this.slug) this.open();
+
+    const escape = (event) => {
+      if (event.defaultPrevented) return
+
+      switch (event.key) {
+        case 'Esc': // IE/Edge specific value
+        case 'Escape':
+          this.close()
+          break
+        default:
+          return
+      }
+
+      event.preventDefault();
+    }
+
+    document.addEventListener('keyup', escape)
+
+    this.$on('hook:destroyed', () => {
+      document.removeEventListener('keyup', escape);
+    });
   },
 
   methods: {
+    open () {
+      return this.$axios.$get(`https://admin.ika.ink/items/gallery_entries?filter[slug][_eq]=${this.slug}&fields=name,image.*,images.directus_files_id.*,year,tools,size,link,description`)
+      .then(response => {
+        this.entry = response.data[0]
+        this.disableScroll()
+        setTimeout(() => { 
+          this.focusFirst(this.$el)
+          this.focusTrap(this.$el)
+        }, 200);
+      })
+    },
+
     close() {
+      this.restoreFocus()
+      this.entry = null
       this.$emit('close-gallery')
-    }
+      this.enableScroll()
+      this.$router.push({ params: { entry: undefined } })
+    },
+
+    enableScroll() {
+      document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
+    },
+
+    disableScroll() {
+      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = '0px'
+    },
+
+    restoreFocus() {
+      const element = document.getElementById(this.focusElement)
+
+      if (element && element.focus) element.focus()
+    },
   }
 }
 </script>

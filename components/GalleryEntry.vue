@@ -6,7 +6,7 @@
 
     <span class="gallery-entry__name d-block text-center text-display--xxs mb-0">{{ name }}</span>
 
-    <NuxtLink :id="`entryLink${id}`" :ref="`entryLink${id}`" :to="url" class="block-link-full" :aria-label="`View ${name}`" @click.native="$emit('show-gallery', slug)"></NuxtLink>
+    <NuxtLink :id="`gallery-${slug}`" :ref="`gallery-${slug}`" :to="url" class="block-link-full" :aria-label="`View ${name}`" @click.native="toggleEvent(slug)"></NuxtLink>
   </div>
 </template>
 
@@ -45,6 +45,13 @@ export default {
     // eslint-disable-next-line object-shorthand
     imagePath: function () {
       return this.getImagePath(this.image)
+    },
+  },
+
+  methods: {
+    toggleEvent(slug) {
+      this.$store.commit('gallery/addActive', `gallery-${slug}`)
+      this.$emit('show-gallery', slug)
     }
   }
 }

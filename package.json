@@ -22,6 +22,7 @@
     "focus-trap": "^6.6.0",
     "focus-trap-vue": "^1.1.1",
     "lodash": "^4.17.21",
+    "lodash.filter": "^4.6.0",
     "masonry-layout": "^4.2.2",
     "moment": "^2.29.1",
     "nuxt": "^2.15.7",
