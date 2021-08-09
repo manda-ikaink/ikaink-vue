@@ -17,7 +17,7 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/style-resources": "^1.2.1",
     "@popperjs/core": "^2.9.3",
-    "bootstrap": "^5.0.2",
+    "bootstrap": "^5.1.0",
     "core-js": "^3.16.0",
     "focus-trap": "^6.6.0",
     "focus-trap-vue": "^1.1.1",
