@@ -32,12 +32,11 @@
 export default {
   layout: 'base',
   
-  async asyncData ({ params, $axios, $config }) {
+  async asyncData ({ $axios, $config }) {
     const gallery = await $axios.$get(`${$config.apiRoute}/items/gallery`)
     const categories = await $axios.$get(`${$config.apiRoute}/items/gallery_categories?fields=slug,name,subtitle,image.*&sort=sort`)
 
     return {
-      slug: params.slug,
       page: gallery.data,
       categories: categories.data,
     }

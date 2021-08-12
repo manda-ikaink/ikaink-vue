@@ -6,7 +6,7 @@
 
       <div v-if="statusCode === 404">
         <p>The page you are looking for may have been removed, had it's name changed or is temporarily unavailable.</p>
-        <p><NuxtLink to="/">Go to homepage</NuxtLink></p>
+        <p><NuxtLink class="home-btn bg--pink-orange" to="/">Go to homepage</NuxtLink></p>
       </div>
 
       <div v-if="statusCode === 500">
@@ -53,5 +53,13 @@ export default {
   width: 800px;
   max-width: 100%;
   margin: 0 auto;
+}
+.home-btn {
+  padding: 7px 15px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  line-height: 1;
+  font-weight: bold;
 }
 </style>

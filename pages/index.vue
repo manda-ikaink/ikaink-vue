@@ -38,11 +38,10 @@
 export default {
   layout: 'home',
 
-  async asyncData ({ params, $axios, $config }) {
+  async asyncData ({ $axios, $config }) {
     const page = await $axios.$get(`${$config.apiRoute}/items/homepage`)
 
     return {
-      slug: params.slug,
       page: page.data
     }
   },

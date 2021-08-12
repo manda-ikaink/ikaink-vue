@@ -15,12 +15,18 @@
     <div class="gallery-popup__body overflow-auto">
       <div class="container">
         <div class="d-lg-flex justify-content-center">
-          <div v-if="entry.image" class="gallery-popup__image mb-4 mb-lg-0">
+          <div v-if="entry.image" class="gallery-popup__image">
             <figure class="text-center mb-0 no-bottom">
               <img class="img-fluid fade-in mb-3 lazyload" src="~/assets/images/loading.svg" :data-src="`${imagePath}?fit=contain&width=1000`" :title="(entry.image.title ? entry.image.title : null)" :alt="(entry.image.description ? entry.image.description : entry.name)" />
               <template v-if="entry.images.length">
                 <img v-for="img in entry.images" :key="img.directus_files_id.id" class="img-fluid fade-in mb-3 lazyload" src="~/assets/images/loading.svg" :data-src="`${getImagePath(img.directus_files_id)}?fit=contain&width=1000`" :title="(img.directus_files_id.title ? img.directus_files_id.title : null)" :alt="(img.directus_files_id.description ? img.directus_files_id.description : entry.name)" />
               </template>
+              <figcaption class="text-center mb-0">
+                <p class="mb-0">
+                  ©<span v-if="entry.year">{{ entry.year }}</span><span v-else>{{ currentYear }}</span> Amanda Eldreth, IKA ink. <br>
+                  Please do not save, screen cap, copy or redistribute images.
+                </p>
+              </figcaption>
             </figure>
           </div>
           <div class="gallery-popup__content">
@@ -59,6 +65,7 @@ import focusTrap from '../../../mixins/focusTrap.js'
 
 export default {
   mixins: [getImagePath, focusFirst, focusTrap],
+  scrollToTop: false,
 
   props: {
     active: {
@@ -74,7 +81,8 @@ export default {
   data() {
     return {
       slug: this.$route.params.entry,
-      entry: null
+      entry: null,
+      currentYear: new Date().getFullYear(),
     }
   },
 
@@ -107,6 +115,7 @@ export default {
 
     this.$on('hook:destroyed', () => {
       document.removeEventListener('keyup', escape);
+      this.enableScroll()
     });
   },
 
@@ -212,15 +221,24 @@ export default {
 
   &__image {
     padding-top: 30px;
-    padding-bottom: 30px;
 
     @include media-breakpoint-up(lg) {
       flex: 1 1 auto;
+      padding-bottom: 30px;
     }
 
     img { 
       pointer-events: none;
       border-radius: 30px; 
+    }
+
+    figcaption {
+      font-size: 12px;
+      line-height: 1;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 14px;
+      }
     }
   }
 

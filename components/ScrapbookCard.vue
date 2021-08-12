@@ -1,14 +1,14 @@
 <template>
-  <div class="scrapbook-card">
+  <article class="scrapbook-card">
     <div class="position-relative">
       <picture v-if="image" class="scrapbook-card__image" :class="ratio ? `ratio--${ratio}` : 'ratio--1-1'">
         <img class="scrapbook-card__img img-fluid w-100 fade-in lazyload" :width="imageWidth" :height="imageHeight" :data-src="`${imagePath}?fit=cover&width=${imageWidth}&height=${imageHeight}`" :title="(image.title ? image.title : null)" :alt="(image.description ? image.description : title)" />
       </picture>
 
-      <div class="scrapbook-card__content">
-        <span class="scrapbook-card__title text-display--md mb-0">{{ title }}</span>
+      <header class="scrapbook-card__content no-bottom">
+        <h1 class="scrapbook-card__title text-display--md mb-2">{{ title }}</h1>
         <p v-if="headline" class="mb-0">{{ headline }}</p>
-      </div>
+      </header>
       
       <NuxtLink :to="{ path: `/scrapbook/${slug}` }" class="scrapbook-card__link block-link-full" :aria-label="title"></NuxtLink>
     </div>
@@ -25,7 +25,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>

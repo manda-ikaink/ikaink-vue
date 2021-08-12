@@ -30,12 +30,11 @@ import moment from 'moment';
 
 export default {
   async asyncData ({ params, $axios, error, $config }) {
-    return await $axios.$get(`${$config.apiRoute}/items/scrapbook_pages?filter[slug][_eq]=${params.slug}&fields=*.*`)
+    return await $axios.$get(`${$config.apiRoute}/items/scrapbook_pages?filter[slug][_eq]=${params.entry}&fields=*.*.*`)
     .then(response => {
       if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
       
       return { 
-        slug: params.slug,
         page: response.data[0],
       }
     }).catch(e => {

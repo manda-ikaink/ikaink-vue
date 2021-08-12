@@ -39,6 +39,7 @@
 <script>
 export default {
   layout: 'base',
+  scrollToTop: false,
   
   async asyncData ({ params, $axios, error, $config }) {
     return await $axios.$get(`${$config.apiRoute}/items/gallery_categories?filter[slug][_eq]=${params.category}&fields=*.*,entries.*.*.*`)

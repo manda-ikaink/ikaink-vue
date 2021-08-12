@@ -137,12 +137,11 @@
 
 <script>
 export default {
-  async asyncData ({ params, $axios, $config }) {
+  async asyncData ({ $axios, $config }) {
     const page = await $axios.$get(`${$config.apiRoute}/items/pages?filter[slug][_eq]=contact&fields=*.*.*`)
 
     return {
-      slug: params.slug,
-      page: page ? page.data[0] : null,
+      page: page ? page.data[0] : null
     }
   },
 

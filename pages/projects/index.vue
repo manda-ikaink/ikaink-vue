@@ -22,12 +22,11 @@
 
 <script>
 export default {
-  async asyncData ({ params, $axios, $config }) {
+  async asyncData ({ $axios, $config }) {
     const project = await $axios.$get(`${$config.apiRoute}/items/projects`)
     const projects = await $axios.$get(`${$config.apiRoute}/items/project_pages?fields=*.*&sort=sort`)
 
     return {
-      slug: params.slug,
       page: project.data,
       projects: projects.data,
     }

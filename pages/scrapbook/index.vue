@@ -10,47 +10,11 @@
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
       </div>
-
-      <div class="container-fluid d-flex justify-content-center flex-wrap">
-        <button id="tag-filter-toggle" class="filter-btn dropdown-toggle bg--blue-indigo mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#tag-filters" aria-expanded="false" aria-controls="tag-filters">
-          Filter Posts
-        </button>
-        <button v-if="checkedTags.length" id="tag-filter-toggle" class="filter-btn bg--blue-indigo mb-3 ms-2" type="button" @click="clear()">
-          Clear All
-        </button>
-      </div>
-      <div id="tag-filters" class="collapse bg--green-teal w-100" aria-labelledby="tag-filter-toggle">
-        <div class="container py-3">
-          <span class="filter-text">Filter by tag:</span>
-
-          <ul class="filter-list list-unstyled row px-0 m-0">
-            <li v-for="tag in tags" :key="`tag-${tag.slug}`" class="filter-list__item col-6 col-md-4">
-              <div class="form-check">
-                <label :for="`${tag.slug}-tag-filter`" class="form-check-label d-flex align-items-center"><input :id="`${tag.slug}-tag-filter`" v-model="checkedTags" class="form-check-input me-2" name="tag" type="checkbox" :value="tag.slug" @change="tagChange()"><span class="d-inline-block mt-2">{{ tag.name }}</span></label>
-              </div>
-            </li>
-          </ul>
-
-          <div class="text-end">
-            <a v-if="checkedTags.length" class="filter-text" href="#" @click.prevent="clear()">Clear All</a>
-          </div>
-        </div>
-      </div>
     </PageHeading>
 
-    <div class="page-content page-content--transparent d-flex flex-column flex-auto pt-lg-5">
-      <div v-if="checkedTags.length" id="scrapbook-selected" class="scrapbook-selected container-fluid d-flex flex-wrap align-items-center mb-4">
-        <div class="filter-text me-2">
-          Selected filters:
-        </div>
-        <template v-for="tag in tags">
-          <div v-if="checkedTags.includes(tag.slug)" :key="`tag-selected-${tag.slug}`" class="filter-item form-check me-2">
-            <input :id="`${tag.slug}-tag-selected`" v-model="checkedTags" class="form-check-input" name="selected-tag" type="checkbox" :value="tag.slug" @change="tagChange()">
-            <label :for="`${tag.slug}-tag-selected`" class="form-check-label bg--pink-orange mb-0">{{ tag.name }} <IconClose :width="10" :height="10"></IconClose></label>
-          </div>
-        </template>
-      </div>
+    <ScrapbookFilters :tags="tags"></ScrapbookFilters>
 
+    <div class="page-content page-content--transparent d-flex flex-column flex-auto pt-lg-5">
       <div id="scrapbook-meta" class="scrapbook-container scrapbook-container--meta d-flex align-items-center justify-content-between mb-3">
         <div class="d-flex justify-content-between flex-auto">
           Page {{ meta.currentPage }} of {{ meta.lastPage }}<span class="visually-hidden">, </span> 
@@ -60,14 +24,19 @@
         </div>
       </div>
       
-      <div v-if="entries.length" class="scrapbook-container masonry-grid d-flex flex-wrap mb-4" :class="loading ? 'loading' : null" aria-describedby="scrapbook-meta">
-        <div v-for="entry in entries" :key="entry.slug" class="masonry-grid__item pb-2">
-          <ScrapbookCard :title="entry.title" :headline="entry.headline" :slug="entry.slug" :image="entry.image" :ratio="entry.aspect_ratio" :tags="entry.scrapbook_tags"></ScrapbookCard>
-        </div>
-      </div>
+      <section v-if="entries.length" class="scrapbook-container mb-4" :class="loading ? 'loading' : null">
+        <h2 class="visually-hidden">Articles</h2>
 
-      <div v-else class="scrapbook-container masonry-grid mb-4">
+        <div class="masonry-grid position-relative d-flex flex-wrap" :class="loading ? 'loading' : null" aria-describedby="scrapbook-meta">
+          <div v-for="entry in entries" :key="entry.slug" class="masonry-grid__item pb-2">
+            <ScrapbookCard :title="entry.title" :headline="entry.headline" :slug="entry.slug" :image="entry.image" :ratio="entry.aspect_ratio" :tags="entry.scrapbook_tags"></ScrapbookCard>
+          </div>
+        </div>
+      </section>
+
+      <div v-else class="scrapbook-container mb-4">
         <p class="text-center">No entires to show. Please check back later.</p>
+        <div class="masonry-grid"></div>
       </div>
 
       <div v-if="meta.lastPage > 1" class="mt-auto w-100">
@@ -81,6 +50,8 @@
 import Masonry from 'masonry-layout'
 
 export default {
+  scrollToTop: false,
+
   async asyncData ({ route, $axios, $config }) {
     const limit = 50
     const query = route.query
@@ -113,7 +84,6 @@ export default {
       entries: scrapbookPages.data,
       meta,
       tags: tags.data,
-      checkedTags
     }
     
     // Pickout data out of full tags list based on if the tag is currently being filtered
@@ -194,16 +164,7 @@ export default {
       setTimeout(() => { 
         this.masonry() 
         this.loading = false
-      }, 500);
-    },
-
-    tagChange() {
-      this.$router.replace({ query: { tags: this.checkedTags.length ? this.checkedTags.toString() : undefined }})
-    },
-
-    clear() {
-      this.checkedTags = []
-      this.$router.replace({ query: { tags: undefined }})
+      }, 700);
     }
   }
 }
@@ -218,60 +179,6 @@ export default {
   max-width: 1200px;
 }
 
-.filter-btn {
-  padding: 7px 10px;
-  border: 0;
-  border-radius: 10px;
-  color: white;
-  line-height: 1;
-  text-shadow: 0 0 2px $almost-black;
-}
-
-.filter-text {
-  font-family: $headings-font-family;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 0.15em;
-  color: inherit;
-  text-transform: uppercase;
-}
-
-.filter-list {
-  &__item {
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1;
-  }
-}
-
-.filter-item {
-  position: relative;
-  padding: 0;
-  border: 0;
-  border-radius: 10px;
-
-  label {
-    display: inline-block;
-    padding: 7px 10px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 10px;
-    line-height: 1;
-  }
-
-  input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    font-size: 0;
-    border: 0;
-    opacity: 0;
-  }
-}
-
 .scrapbook-container {
   position: relative;
   margin: 0 auto;
@@ -283,6 +190,11 @@ export default {
   @include media-breakpoint-up(xl) { width: 1050px; }
 
   @include media-breakpoint-up(xxl) { width: 1400px; }
+
+  &.loading {
+    min-height: 100vh;
+    background: no-repeat url('~assets/images/loading.svg') top center;
+  }
 
   &--meta {
     padding-left: 7px;

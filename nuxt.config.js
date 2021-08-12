@@ -11,6 +11,12 @@ export default {
     websiteTitle: 'IKA ink'
   },
 
+  loading: {
+    color: '#f67280',
+    height: '3px',
+    throttle: 300
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'IKA ink',

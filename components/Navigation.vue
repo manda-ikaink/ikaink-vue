@@ -1,5 +1,7 @@
 <template>
-  <nav>
+  <nav class="page-nav">
+    <h1 class="visually-hidden">Site Navigation</h1>
+
     <UiOffcanvasBtn id="navCanvasBtn" class="nav-toggle" target="navCanvas" aria-label="Toggle Navigation">
       <span></span>
     </UiOffcanvasBtn>

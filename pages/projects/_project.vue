@@ -39,13 +39,12 @@
 <script>
 export default {
   async asyncData ({ params, $axios, error, $config }) {
-    return await $axios.$get(`${$config.apiRoute}/items/project_pages?filter[slug][_eq]=${params.slug}&fields=*.*.*`)
+    return await $axios.$get(`${$config.apiRoute}/items/project_pages?filter[slug][_eq]=${params.project}&fields=*.*.*`)
     .then(response => {
       if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
       
       return { 
-        slug: params.slug,
-        page: response.data[0],
+        page: response.data[0]
       }
     }).catch(e => {
       error(e)
