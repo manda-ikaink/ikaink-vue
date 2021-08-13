@@ -4,27 +4,29 @@
   &--xxl  {
     color: inherit;
     font-family: $headings-font-family;
-    font-size: $h1-font-size;
+    font-size: 1.5rem;
     font-weight: $headings-font-weight;
     letter-spacing: $letter-spacing-header-xl;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
     text-transform: uppercase;
 
-    @include media-breakpoint-up(md) { font-size: $h1-font-size * 1.2; }
+    @include media-breakpoint-up(md) { font-size: $h1-font-size; }
+
+    @include media-breakpoint-up(lg) { font-size: $h1-font-size * 1.2; }
   }
 
   &--xl {
     color: inherit;
     font-family: $headings-font-family;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: $headings-font-weight;
     letter-spacing: $letter-spacing-header-xl;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
     text-transform: uppercase;
 
-    @include media-breakpoint-up(sm) { font-size: 2.5rem; }
+    @include media-breakpoint-up(sm) { font-size: 1.75rem; }
 
     @include media-breakpoint-up(md) { font-size: $h1-font-size; }
   }
@@ -32,51 +34,59 @@
   &--lg {
     color: inherit;
     font-family: $headings-font-family;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: $headings-font-weight;
     letter-spacing: $letter-spacing-header-lg;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
     text-transform: none;
+
+    @include media-breakpoint-up(md) { font-size: 2rem; }
   }
 
   &--md {
     color: inherit;
     font-family: $headings-font-family;
-    font-size: 1.75rem;
+    font-size: 1.3rem;
     font-weight: $headings-font-weight;
     letter-spacing: $letter-spacing-header-lg;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
     text-transform: none;
+
+    @include media-breakpoint-up(md) { font-size: 1.75rem; }
   }
 
   &--sm {
     color: inherit;
     font-family: $headings-font-family;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: $headings-font-weight;
     letter-spacing: $letter-spacing-header-md;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
     text-transform: none;
+
+    @include media-breakpoint-up(md) { font-size: 1.75rem; }
   }
 
   &--xs {
     color: inherit;
     font-family: $font-family-base;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: $headings-font-weight;
     letter-spacing: $letter-spacing-header-lg;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
     text-transform: uppercase;
+
+    @include media-breakpoint-up(md) { font-size: 1.25rem; }
   }
 
   &--xxs {
     color: inherit;
     font-family: $font-family-base;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: $headings-font-weight;
     letter-spacing: $letter-spacing-header-lg;
     line-height: $headings-line-height;

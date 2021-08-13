@@ -6,18 +6,20 @@
       :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}` : null"
     />
     
-    <PageHero :title="page.title" :subtitle="date">
+    <PageHero :title="page.title" :subtitle="date" :hero-image="page.hero_image">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
         <Breadcrumb></Breadcrumb>
       </div>
     </PageHero>
+
+    <div class="float-lg-start"></div>
 
     <div class="page-content d-flex flex-column flex-auto">
       <div class="container">
         <p v-if="page.headline" class="text-display--xs text-center mb-0">{{ page.headline }}</p>
         <hr v-if="page.headline">
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <div v-html="page.content">
+        <div class="wysiwyg" v-html="page.content">
         </div>
       </div>
     </div>
@@ -73,6 +75,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './assets/css/_wysiwyg.scss';
+
 .container-fluid {
   max-width: 1200px;
 }
@@ -80,4 +84,8 @@ export default {
 .container {
   max-width: 1000px;
 }
+</style>
+
+<style lang="scss">
+@import './assets/css/_wysiwyg.scss';
 </style>

@@ -55,6 +55,7 @@ export default {
 
   &__item {
     max-width: 200px;
+    line-height: 1.5;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
