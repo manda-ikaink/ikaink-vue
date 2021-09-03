@@ -18,7 +18,7 @@
     "@nuxtjs/style-resources": "^1.2.1",
     "@popperjs/core": "^2.9.3",
     "bootstrap": "^5.0.2",
-    "core-js": "^3.16.0",
+    "core-js": "^3.17.2",
     "focus-trap": "^6.6.0",
     "focus-trap-vue": "^1.1.1",
     "lodash": "^4.17.21",
