@@ -8,7 +8,7 @@
 
     <PageHero v-if="page" :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <Breadcrumb class="mt-3 mt-lg-5"></Breadcrumb>
+        <BreadCrumb class="mt-3 mt-lg-5"></BreadCrumb>
       </div>
     </PageHero>
 

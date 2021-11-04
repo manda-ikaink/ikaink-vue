@@ -8,7 +8,7 @@
     
     <PageHero :title="page.title" :subtitle="date" :hero-image="page.hero_image">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <Breadcrumb></Breadcrumb>
+        <BreadCrumb></BreadCrumb>
       </div>
     </PageHero>
 
@@ -75,14 +75,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assets/css/_wysiwyg.scss';
-
 .container-fluid {
   max-width: 1200px;
 }
 
 .container {
-  max-width: 1000px;
+  @include media-breakpoint-between(xxl, 3xl) {
+    max-width: 1200px;
+  }
 }
 </style>
 

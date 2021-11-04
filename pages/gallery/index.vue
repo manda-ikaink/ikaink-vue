@@ -8,14 +8,14 @@
 
     <PageHeading :title="page.title" :subtitle="page.subtitle">
       <div class="d-flex align-items-center justify-content-center">
-        <Breadcrumb></Breadcrumb>
+        <BreadCrumb></BreadCrumb>
       </div>
     </PageHeading>
 
     <div class="page-content pt-lg-5 flex-auto">
       <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div v-for="category in categories" :key="category.id" class="col-sm-6 col-lg-4 px-3 mb-4">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div v-for="category in categories" :key="category.id" class="px-3 mb-4">
             <GalleryCard 
               :name="category.name" 
               :slug="category.slug"
@@ -52,9 +52,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.container-fluid {
-  max-width: 1400px;
-}
-</style>

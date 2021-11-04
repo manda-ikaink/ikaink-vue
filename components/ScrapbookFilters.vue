@@ -2,7 +2,7 @@
   <section>
     <h2 class="visually-hidden">Filters</h2>
     <div class="filter-btn-group container-fluid d-flex justify-content-center flex-wrap">
-      <button id="tag-filter-toggle" ref="filterToggle" class="filter-btn dropdown-toggle bg--blue-indigo mb-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tag-filters" aria-expanded="false" aria-controls="tag-filters">
+      <button id="tag-filter-toggle" ref="filterToggle" class="filter-btn dropdown-toggle bg--blue-indigo mt-3 mb-4 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tag-filters" aria-expanded="false" aria-controls="tag-filters">
         <span class="hidden">Show Filters</span>
         <span class="shown">Hide Filters</span>
       </button>

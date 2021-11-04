@@ -8,14 +8,14 @@
 
     <PageHeading :title="page.name" :subtitle="page.subtitle">
       <div class="d-flex align-items-center justify-content-center">
-        <Breadcrumb></Breadcrumb>
+        <BreadCrumb></BreadCrumb>
       </div>
     </PageHeading>
 
     <div id="gallery-list" class="page-content pt-lg-5" tabindex="-1">
       <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div v-for="entry in entries" :key="entry.id" class="col-6 col-sm-4 col-lg-3 px-3 mb-4">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div v-for="entry in entries" :key="entry.id" class="px-3 mb-5">
             <GalleryEntry 
               :id="entry.gallery_entries_id.id"
               :name="entry.gallery_entries_id.name" 
@@ -102,9 +102,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.container-fluid {
-  max-width: 1200px;
-}
-</style>

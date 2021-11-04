@@ -63,6 +63,8 @@ export default {
   background: $almost-black;
   color: $white;
   overflow: hidden;
+  clip-path: content-box;
+  backface-visibility: hidden;
   transition: background 0.75s cubic-bezier(0.85, 0, 0.15, 1);
 
   &:hover,

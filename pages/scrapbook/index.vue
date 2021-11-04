@@ -8,7 +8,7 @@
     
     <PageHeading :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <Breadcrumb></Breadcrumb>
+        <BreadCrumb></BreadCrumb>
       </div>
     </PageHeading>
 
@@ -190,6 +190,8 @@ export default {
   @include media-breakpoint-up(xl) { width: 1050px; }
 
   @include media-breakpoint-up(xxl) { width: 1400px; }
+
+  @include media-breakpoint-up(4k) { width: 1750px; }
 
   &.loading {
     min-height: 100vh;

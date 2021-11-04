@@ -8,7 +8,7 @@
 
     <PageHero :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <Breadcrumb></Breadcrumb>
+        <BreadCrumb></BreadCrumb>
       </div>
     </PageHero>
 
@@ -54,6 +54,8 @@ export default {
 }
 
 .container {
-  max-width: 1000px;
+  @include media-breakpoint-between(xxl, 3xl) {
+    max-width: 1000px;
+  }
 }
 </style>
