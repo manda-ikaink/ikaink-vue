@@ -90,6 +90,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxtjs/style-resources',
+    '@nuxtjs/google-analytics',
     'nuxt-lazysizes',
     'nuxt-purgecss',
   ],
@@ -110,6 +111,8 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
+      name: 'IKA ink',
+      short_name: 'IKA ink',
       lang: 'en'
     }
   },
@@ -123,6 +126,12 @@ export default {
       priority: 1,
       lastmod: new Date()
     }
+  },
+
+  // Google Analytics module configuration: https://google-analytics.nuxtjs.org/
+  googleAnalytics: {
+    id: 'UA-168761141-1',
+    checkDuplicatedScript: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

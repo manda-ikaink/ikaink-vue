@@ -8,7 +8,7 @@
     
     <PageHeading :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <BreadCrumb></BreadCrumb>
+        <Breadcrumb></Breadcrumb>
       </div>
     </PageHeading>
 

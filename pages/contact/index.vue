@@ -8,7 +8,7 @@
 
     <PageHero v-if="page" :title="page.title" :subtitle="page.subtitle">
       <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-        <BreadCrumb class="mt-3 mt-lg-5"></BreadCrumb>
+        <Breadcrumb class="mt-3 mt-lg-5"></Breadcrumb>
       </div>
     </PageHero>
 
@@ -229,6 +229,11 @@ export default {
           }).then(response => {
             this.success = true
             this.errored = false
+            this.$ga.event({
+              eventCategory: 'Contact',
+              eventAction: 'submit',
+              eventLabel: 'Main Contact Form'
+            })
           })
           // eslint-disable-next-line node/handle-callback-err
           .catch(error => {
