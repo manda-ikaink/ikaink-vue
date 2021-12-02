@@ -27,9 +27,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
-import moment from 'moment';
-
 export default {
   async asyncData ({ params, $axios, error, $config }) {
     return await $axios.$get(`${$config.apiRoute}/items/scrapbook_pages?filter[slug][_eq]=${params.entry}&fields=*.*.*`)
@@ -55,6 +52,7 @@ export default {
 
   computed: {
     date() {
+      const moment = require('moment')
       const minutes = moment().diff(moment(this.page.date_published), 'minutes')
       const hours = moment().diff(moment(this.page.date_published), 'hours');
       // eslint-disable-next-line no-unused-vars

@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import Masonry from 'masonry-layout'
-
 export default {
   scrollToTop: false,
 
@@ -147,6 +145,7 @@ export default {
 
   methods: {
     masonry () {
+      const Masonry = require('masonry-layout')
       const grid = document.querySelector('.masonry-grid');
       // eslint-disable-next-line no-unused-vars
       const msnry = new Masonry( grid, {

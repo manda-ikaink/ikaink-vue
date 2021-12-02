@@ -5,9 +5,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
-// import { Offcanvas } from 'bootstrap'
-
 export default {
   props: {
     id: {
