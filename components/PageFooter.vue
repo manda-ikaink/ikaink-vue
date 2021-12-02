@@ -31,6 +31,7 @@ export default {
 @import './assets/css/mixins/_gradients.scss';
 
 .page-footer {
+  padding-bottom: 15px;
   @include linear-gradient(
     to top, 
     transparent, 

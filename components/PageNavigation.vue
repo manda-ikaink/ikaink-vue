@@ -36,6 +36,10 @@
           </li>
         </ul>
 
+        <div class="text-center">
+          <KofiButton></KofiButton>
+        </div>
+
         <div class="nav-panel__links mt-auto">
           <div class="mb-3">
             <SocialMedia></SocialMedia>
