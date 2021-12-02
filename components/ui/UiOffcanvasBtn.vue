@@ -6,7 +6,7 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { Offcanvas } from 'bootstrap'
+// import { Offcanvas } from 'bootstrap'
 
 export default {
   props: {
@@ -53,6 +53,8 @@ export default {
         offcanvas.hide()
       })
     })
+
+    const { Offcanvas } = require('bootstrap')
 
     // eslint-disable-next-line no-new
     const offcanvas = new Offcanvas(canvas)
