@@ -60,7 +60,7 @@ export default {
     const limit = 50
     const currentPage = Number(route.query.page ? route.query.page : 1)
     const tags = await $axios.$get(`${$config.apiRoute}/items/scrapbook_tags?fields=name,slug,pages.scrapbook_pages_id`)
-    const scrapbook = await $axios.$get(`${$config.apiRoute}/items/scrapbook`)
+    const scrapbook = await $axios.$get(`${$config.apiRoute}/items/scrapbook`) 
     
     return {
       limit,

@@ -3,7 +3,7 @@
     <SocialHead
       :title="page.og_title || page.title"
       :description="page.og_description || page.meta_description"
-      :image="page.og_image ? `${$config.apiRoute}/assets/${page.og_image}?fit=cover&width=600&height=300` : `${$config.baseURL}/ikaink.png`"
+      :image="page.og_image ? `${getImagePath(page.og_image)}?fit=cover&width=600&height=300` : `${$config.baseURL}/ikaink.png`"
     />
     
     <PageHero :title="page.title" :subtitle="date" :hero-image="page.hero_image">
@@ -27,7 +27,12 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import getImagePath from '../../mixins/getImagePath.js'
+
 export default {
+   mixins: [getImagePath],
+
   async asyncData ({ params, $axios, error, $config }) {
     return await $axios.$get(`${$config.apiRoute}/items/scrapbook_pages?filter[slug][_eq]=${params.entry}&fields=*.*.*`)
     .then(response => {

@@ -38,12 +38,17 @@
 export default {
   layout: 'home',
 
-  async asyncData ({ $axios, $config }) {
-    const page = await $axios.$get(`${$config.apiRoute}/items/homepage`)
-
-    return {
-      page: page.data
-    }
+  async asyncData ({ $axios, $config, error }) {
+    return await $axios.$get(`${$config.apiRoute}/items/homepage`)
+    .then(response => {
+      if (response.data.length === 0) error({ statusCode: 404, message: 'Page not found' })
+      
+      return { 
+        page: response.data,
+      }
+    }).catch(e => {
+      error(e)
+    })
   },
 
   head() {
