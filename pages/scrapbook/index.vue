@@ -12,36 +12,46 @@
       </div>
     </PageHeading>
 
-    <ScrapbookFilters :tags="tags"></ScrapbookFilters>
-
+    <client-only>
+      <ScrapbookFilters :tags="tags"></ScrapbookFilters>
+    </client-only>
+  
     <div class="page-content page-content--transparent d-flex flex-column flex-auto pt-lg-5">
-      <div id="scrapbook-meta" class="scrapbook-container scrapbook-container--meta d-flex align-items-center justify-content-between mb-3">
-        <div class="d-flex justify-content-between flex-auto">
-          Page {{ meta.currentPage }} of {{ meta.lastPage }}<span class="visually-hidden">, </span> 
-        </div>
-        <div>
-          {{ meta.totalCount }} total entries
-        </div>
-      </div>
-      
-      <section v-if="entries.length" class="scrapbook-container mb-4" :class="loading ? 'loading' : null">
-        <h2 class="visually-hidden">Articles</h2>
-
-        <div class="masonry-grid position-relative d-flex flex-wrap" :class="loading ? 'loading' : null" aria-describedby="scrapbook-meta">
-          <div v-for="entry in entries" :key="entry.slug" class="masonry-grid__item pb-2">
-            <ScrapbookCard :title="entry.title" :headline="entry.headline" :slug="entry.slug" :image="entry.image" :ratio="entry.aspect_ratio" :tags="entry.scrapbook_tags"></ScrapbookCard>
+      <client-only>
+        <div id="scrapbook-meta" class="scrapbook-container scrapbook-container--meta d-flex align-items-center justify-content-between mb-3">
+          <div class="d-flex justify-content-between flex-auto">
+            Page {{ meta.currentPage }} of {{ meta.lastPage }}<span class="visually-hidden">, </span> 
+          </div>
+          <div>
+            {{ meta.totalCount }} total entries
           </div>
         </div>
-      </section>
+      </client-only>
+      
+      <client-only v-if="entries.length">
+        <section class="scrapbook-container mb-4" :class="loading ? 'loading' : null">
+          <h2 class="visually-hidden">Articles</h2>
 
-      <div v-else class="scrapbook-container mb-4">
-        <p class="text-center">No entires to show. Please check back later.</p>
-        <div class="masonry-grid"></div>
-      </div>
+          <div class="masonry-grid position-relative d-flex flex-wrap" :class="loading ? 'loading' : null" aria-describedby="scrapbook-meta">
+            <div v-for="entry in entries" :key="entry.slug" class="masonry-grid__item pb-2">
+              <ScrapbookCard :title="entry.title" :headline="entry.headline" :slug="entry.slug" :image="entry.image" :ratio="entry.aspect_ratio" :tags="entry.scrapbook_tags"></ScrapbookCard>
+            </div>
+          </div>
+        </section>
+      </client-only>
 
-      <div v-if="meta.lastPage > 1" class="mt-auto w-100">
-        <Pagination :meta="meta"></Pagination>
-      </div>
+      <client-only v-else>
+        <div class="scrapbook-container mb-4">
+          <p class="text-center">No entires to show. Please check back later.</p>
+          <div class="masonry-grid"></div>
+        </div>
+      </client-only>
+      
+      <client-only>
+        <div v-if="meta.lastPage > 1" class="mt-auto w-100">
+          <Pagination :meta="meta"></Pagination>
+        </div>
+      </client-only>
     </div>
   </div>
 </template>
@@ -70,6 +80,8 @@ export default {
     // Meta & Pagination
     const lastPage = (Math.ceil(Number(scrapbookPages.meta.filter_count / limit)) > 1) ? Math.ceil(Number(scrapbookPages.meta.filter_count / limit)) : 1
     const meta = {
+      filterQuery,
+      limit,
       currentPage,
       lastPage,
       prevPage: ((currentPage > 1) ? currentPage - 1 : null),
@@ -144,6 +156,9 @@ export default {
   },
 
   methods: {
+    getPosts() {
+
+    },
     masonry () {
       const Masonry = require('masonry-layout')
       const grid = document.querySelector('.masonry-grid');
