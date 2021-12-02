@@ -14,11 +14,9 @@
 
     <client-only>
       <ScrapbookFilters :tags="tags"></ScrapbookFilters>
-    </client-only>
-  
-    <div class="page-content page-content--transparent d-flex flex-column flex-auto pt-lg-5">
-      <client-only>
-        <div id="scrapbook-meta" class="scrapbook-container scrapbook-container--meta d-flex align-items-center justify-content-between mb-3">
+    
+      <div class="page-content page-content--transparent d-flex flex-column flex-auto pt-lg-5">
+        <div v-if="meta.length" id="scrapbook-meta" class="scrapbook-container scrapbook-container--meta d-flex align-items-center justify-content-between mb-3">
           <div class="d-flex justify-content-between flex-auto">
             Page {{ meta.currentPage }} of {{ meta.lastPage }}<span class="visually-hidden">, </span> 
           </div>
@@ -26,33 +24,31 @@
             {{ meta.totalCount }} total entries
           </div>
         </div>
-      </client-only>
-      
-      <client-only v-if="entries.length">
-        <section class="scrapbook-container mb-4" :class="loading ? 'loading' : null">
-          <h2 class="visually-hidden">Articles</h2>
+        
+        <client-only v-if="entries.length">
+          <section class="scrapbook-container mb-4" :class="loading ? 'loading' : null">
+            <h2 class="visually-hidden">Articles</h2>
 
-          <div class="masonry-grid position-relative d-flex flex-wrap" :class="loading ? 'loading' : null" aria-describedby="scrapbook-meta">
-            <div v-for="entry in entries" :key="entry.slug" class="masonry-grid__item pb-2">
-              <ScrapbookCard :title="entry.title" :headline="entry.headline" :slug="entry.slug" :image="entry.image" :ratio="entry.aspect_ratio" :tags="entry.scrapbook_tags"></ScrapbookCard>
+            <div class="masonry-grid position-relative d-flex flex-wrap" :class="loading ? 'loading' : null" aria-describedby="scrapbook-meta">
+              <div v-for="entry in entries" :key="entry.slug" class="masonry-grid__item pb-2">
+                <ScrapbookCard :title="entry.title" :headline="entry.headline" :slug="entry.slug" :image="entry.image" :ratio="entry.aspect_ratio" :tags="entry.scrapbook_tags"></ScrapbookCard>
+              </div>
             </div>
-          </div>
-        </section>
-      </client-only>
+          </section>
+        </client-only>
 
-      <client-only v-else>
-        <div class="scrapbook-container mb-4">
-          <p class="text-center">No entires to show. Please check back later.</p>
-          <div class="masonry-grid"></div>
-        </div>
-      </client-only>
-      
-      <client-only>
-        <div v-if="meta.lastPage > 1" class="mt-auto w-100">
+        <client-only v-else>
+          <div class="scrapbook-container mb-4">
+            <p class="text-center">No entires to show. Please check back later.</p>
+            <div class="masonry-grid"></div>
+          </div>
+        </client-only>
+        
+        <div v-if="meta && meta.lastPage > 1" class="mt-auto w-100">
           <Pagination :meta="meta"></Pagination>
         </div>
-      </client-only>
-    </div>
+      </div>
+    </client-only>
   </div>
 </template>
 
@@ -62,75 +58,23 @@ export default {
 
   async asyncData ({ route, $axios, $config }) {
     const limit = 50
-    const query = route.query
-    const currentPage = Number(query.page ? query.page : 1)
-
-    // Tag & filtering
+    const currentPage = Number(route.query.page ? route.query.page : 1)
     const tags = await $axios.$get(`${$config.apiRoute}/items/scrapbook_tags?fields=name,slug,pages.scrapbook_pages_id`)
-    const checkedTags = query.tags ? query.tags.split(',') : []
-    const pageIds = checkedTags.length ? getSelectedTags(tags, checkedTags) : []
-
-    let filterQuery = ''
-    if (checkedTags.length) filterQuery = pageIds.length ? `&filter[id][_in]=${pageIds}` : '&filter[id][_in]=0'
-
-    // Data
     const scrapbook = await $axios.$get(`${$config.apiRoute}/items/scrapbook`)
-    const scrapbookPages = await $axios.$get(`${$config.apiRoute}/items/scrapbook_pages?fields=slug,title,headline,aspect_ratio,scrapbook_tags.scrapbook_tags_slug.name,scrapbook_tags.scrapbook_tags_slug.slug,image.*${filterQuery}&sort[]=-date_published&limit=${limit}&page=${currentPage}&meta=*`)
-
-    // Meta & Pagination
-    const lastPage = (Math.ceil(Number(scrapbookPages.meta.filter_count / limit)) > 1) ? Math.ceil(Number(scrapbookPages.meta.filter_count / limit)) : 1
-    const meta = {
-      filterQuery,
-      limit,
-      currentPage,
-      lastPage,
-      prevPage: ((currentPage > 1) ? currentPage - 1 : null),
-      nextPage: ((currentPage < lastPage) ? currentPage + 1 : null),
-      totalCount: scrapbookPages.meta.filter_count,
-    }
     
     return {
+      limit,
+      currentPage,
       page: scrapbook.data,
-      entries: scrapbookPages.data,
-      meta,
-      tags: tags.data,
-    }
-    
-    // Pickout data out of full tags list based on if the tag is currently being filtered
-    // Specifically getting associated page IDs per selected tag
-    function getSelectedTags($tags, $queryTags) {
-      const $selected = []
-
-      Object.entries($tags.data).forEach(([key, value], index) => {
-        if ($queryTags.includes(value.slug)) {
-          $selected.push({pages: value.pages})
-        }
-      })
-
-      return $selected.length ? getPageIds($selected) : []
-    }
-
-    // Pick out page IDs from data and merge into one array w/o duplicates
-    function getPageIds($tags) {
-      const $ids = []
-
-      Object.entries($tags).forEach(([key, value], index) => {
-        if (value.pages.length) {
-          Object.entries(value.pages).forEach(([key, value], index) => {
-            if (!$ids.includes(value.scrapbook_pages_id)) {
-              $ids.push(value.scrapbook_pages_id)
-            }
-          })
-        }
-      })
-      
-      return $ids
+      tags: tags.data
     }
   },
 
   data() {
     return {
-      loading: true
+      loading: true,
+      entries: {},
+      meta: {}
     }
   },
 
@@ -144,21 +88,75 @@ export default {
   },
 
   watch: {
-    entries() {
-      this.layout()
-    }
+    '$route'() {
+      this.getPosts();
+    },
   },
 
-  watchQuery: ['tags', 'page'],
-
   mounted() {
-    this.layout()
+    this.getPosts()
   },
 
   methods: {
     getPosts() {
+      this.currentPage = Number(this.$route.query.page ? this.$route.query.page : 1)
 
+      // Tag & filtering
+      const checkedTags = this.$route.query.tags ? this.$route.query.tags.split(',') : []
+      const pageIds = checkedTags.length ? this.getSelectedTags(this.tags, checkedTags) : []
+      let filterQuery = ''
+      if (checkedTags.length) filterQuery = pageIds.length ? `&filter[id][_in]=${pageIds}` : '&filter[id][_in]=0'
+
+      // Data
+      this.$axios.$get(`${this.$config.apiRoute}/items/scrapbook_pages?fields=slug,title,headline,aspect_ratio,scrapbook_tags.scrapbook_tags_slug.name,scrapbook_tags.scrapbook_tags_slug.slug,image.*${filterQuery}&sort[]=-date_published&limit=${this.limit}&page=${this.currentPage}&meta=*`).then(posts => {
+        // Meta & Pagination
+        const lastPage = (Math.ceil(Number(posts.meta.filter_count / this.limit)) > 1) ? Math.ceil(Number(posts.meta.filter_count / this.limit)) : 1
+        const meta = {
+          filterQuery,
+          limit: this.limit,
+          currentPage: this.currentPage,
+          lastPage,
+          prevPage: ((this.currentPage > 1) ? this.currentPage - 1 : null),
+          nextPage: ((this.currentPage < lastPage) ? this.currentPage + 1 : null),
+          totalCount: posts.meta.filter_count,
+        }
+        this.meta = meta
+        this.entries = posts.data
+        this.layout()
+      });
     },
+
+    // Pickout data out of full tags list based on if the tag is currently being filtered
+    // Specifically getting associated page IDs per selected tag
+    getSelectedTags($tags, $queryTags) {
+      const $selected = []
+
+      Object.entries($tags).forEach(([key, value], index) => {
+        if ($queryTags.includes(value.slug)) {
+          $selected.push({pages: value.pages})
+        }
+      })
+
+      return $selected.length ? this.getPageIds($selected) : []
+    },
+
+    // Pick out page IDs from data and merge into one array w/o duplicates
+    getPageIds($tags) {
+      const $ids = []
+
+      Object.entries($tags).forEach(([key, value], index) => {
+        if (value.pages.length) {
+          Object.entries(value.pages).forEach(([key, value], index) => {
+            if (!$ids.includes(value.scrapbook_pages_id)) {
+              $ids.push(value.scrapbook_pages_id)
+            }
+          })
+        }
+      })
+      
+      return $ids
+    },
+
     masonry () {
       const Masonry = require('masonry-layout')
       const grid = document.querySelector('.masonry-grid');
