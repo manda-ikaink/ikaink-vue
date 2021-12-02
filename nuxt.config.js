@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: true,
@@ -107,6 +109,20 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+
+  // Routes: https://nuxtjs.org/docs/configuration-glossary/configuration-generate/
+  generate: {
+    routes() {
+      // scrapbook pages
+      return axios.get('https://admin.ika.ink/items/scrapbook_pages?fields=slug').then(res => {
+        const pages = res.data.data.map(page => {
+          return '/scrapbook/' + page.slug
+        })
+
+        return pages
+      })
+    }
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
