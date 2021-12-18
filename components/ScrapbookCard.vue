@@ -158,6 +158,7 @@ export default {
   &__title { 
     color: inherit;
     font-size: 16px; 
+    font-weight: bold;
   }
 
   &__tags {

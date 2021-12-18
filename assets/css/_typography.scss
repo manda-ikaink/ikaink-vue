@@ -39,7 +39,7 @@
     letter-spacing: $letter-spacing-header-lg;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
-    text-transform: none;
+    text-transform: uppercase;
 
     @include media-breakpoint-up(md) { font-size: 2rem; }
   }
@@ -52,7 +52,7 @@
     letter-spacing: $letter-spacing-header-lg;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
-    text-transform: none;
+    text-transform: uppercase;
 
     @include media-breakpoint-up(md) { font-size: 1.75rem; }
   }
@@ -65,7 +65,7 @@
     letter-spacing: $letter-spacing-header-md;
     line-height: $headings-line-height;
     margin-bottom: $headings-margin-bottom;
-    text-transform: none;
+    text-transform: uppercase;
 
     @include media-breakpoint-up(md) { font-size: 1.75rem; }
   }

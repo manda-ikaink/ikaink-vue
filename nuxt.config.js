@@ -10,7 +10,7 @@ export default {
   publicRuntimeConfig: {
     baseURL: process.env.BASE_URL || 'https://ika.ink',
     apiRoute: 'https://admin.ika.ink',
-    websiteTitle: 'IKA ink'
+    websiteTitle: 'IKA INK'
   },
 
   loading: {
@@ -21,7 +21,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'IKA ink',
+    title: 'IKA INK',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -30,7 +30,7 @@ export default {
       {
         hid: 'twitter:title',
         name: 'twitter:title',
-        content: 'IKA ink'
+        content: 'IKA INK'
       },
       {
         hid: 'twitter:description',
@@ -40,7 +40,7 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'IKA ink'
+        content: 'IKA INK'
       },
       {
         hid: 'og:description',
@@ -50,7 +50,7 @@ export default {
       {
         hid: 'og:site_name',
         property: 'og:site_name',
-        content: 'IKA ink'
+        content: 'IKA INK'
       }
     ],
     link: [
@@ -127,8 +127,8 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      name: 'IKA ink',
-      short_name: 'IKA ink',
+      name: 'IKA INK',
+      short_name: 'IKA INK',
       lang: 'en'
     }
   },

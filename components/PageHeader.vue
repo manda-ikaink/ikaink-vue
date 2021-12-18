@@ -6,7 +6,7 @@
         <NuxtLink to="/" class="d-flex align-items-center justify-content-center">
           <img class="page-header__logo--center svg drop-shadow" src="~assets/images/ika-ink-large-white.svg" alt="IKA ink Logo" :title="$config.websiteTitle">
           <span class="page-header__logo--left drop-shadow">IKA</span>
-          <span class="page-header__logo--right drop-shadow">ink</span>
+          <span class="page-header__logo--right drop-shadow">INK</span>
         </NuxtLink>
       </div>
     </div>
@@ -107,7 +107,6 @@ export default {
       margin-right: -12px;
       font-family: $headings-font-family;
 			font-size: 18px;
-			font-weight: lighter;
 			letter-spacing: 0.75em;
       line-height: 1;
 			color: $white;
