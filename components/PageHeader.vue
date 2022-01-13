@@ -1,5 +1,8 @@
 <template>
   <header ref="header" class="page-header">
+    <div class="banner">
+    </div>
+    
     <div class="container-fluid">
       <!-- Logo -->
       <div class="page-header__logo">

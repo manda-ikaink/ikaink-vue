@@ -1,14 +1,16 @@
 <template>
   <div id="__page" class="bg--trans-dark">
-    <PageHeader></PageHeader>
-    <PageNavigation></PageNavigation>
+    <PageHeader />
+    <PageNavigation />
+
+    <UpdatesPanel />
 
     <main id="__main">
       <Nuxt />
     </main>
 
-    <PageFooter></PageFooter>
+    <PageFooter />
     
-    <PageBackground></PageBackground>
+    <PageBackground />
   </div>
 </template>

@@ -6,7 +6,7 @@
       <span></span>
     </UiOffcanvasBtn>
 
-    <UiOffcanvas id="navCanvas" class="nav-canvas" trigger="navCanvasBtn">
+    <UiOffcanvas id="navCanvas" class="nav-canvas" trigger="navCanvasBtn" direction="end" :button="false">
       <div slot="body">
         <ul id="nav-main" class="nav">
           <li class="nav__item">
@@ -30,7 +30,17 @@
             </NuxtLink>
           </li>
           <li class="nav__item">
-            <NuxtLink id="nav-link-4" class="nav__link" to="/contact">
+            <a id="nav-link-4" class="nav__link" href="https://buncafe.ika.ink" target="_blank">
+              Shop
+            </a>
+          </li>
+          <li class="nav__item">
+            <a id="nav-link-5" class="nav__link" href="https://ikainkart.etsy.com" target="_blank">
+              Etsy
+            </a>
+          </li>
+          <li class="nav__item">
+            <NuxtLink id="nav-link-6" class="nav__link" to="/contact">
               Contact
             </NuxtLink>
           </li>
@@ -94,19 +104,23 @@
 
 .nav-canvas {
   width: 100%;
-  padding: 75px 15px 20px;
+  padding: 50px 15px 0;
 
-  @include media-breakpoint-up(md) { width: 250px; }
+  @include media-breakpoint-up(md) { 
+    width: 250px; 
+    padding: 75px 15px 0;
+  }
 }
 
 .nav {
   height: auto;
   list-style: none;
-  overflow-y: auto;
   padding: 0;
   text-align: center;
 
-  &__item { margin-bottom: rem(20px); }
+  &__item { 
+    margin-bottom: rem(10px); 
+  }
 
   &__link {
     font-family: $headings-font-family;

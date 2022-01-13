@@ -1,6 +1,7 @@
 <template>
-  <div :id="id" class="offcanvas offcanvas-end" tabindex="-1" :aria-labelledby="trigger">
-    <div class="offcanvas-header">
+  <div :id="id" :class="`offcanvas offcanvas-${direction}`" tabindex="-1" :aria-labelledby="trigger">
+    <div class="offcanvas-header align-items-start" :class="direction === 'start' ? 'flex-row-reverse' : null">
+      <button v-if="button" type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       <slot name="header"></slot>
     </div>
 
@@ -20,12 +21,22 @@ export default {
     trigger: {
       type: String,
       required: true
+    },
+    direction: {
+      type: String,
+      required: false,
+      default: 'start'
+    },
+    button: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .offcanvas {
   transition: transform .8s cubic-bezier(.7,0,.3,1);
 }

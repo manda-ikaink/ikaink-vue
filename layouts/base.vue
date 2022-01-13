@@ -1,12 +1,14 @@
 <template>
   <div id="__page">
-    <PageHeader></PageHeader>
-    <PageNavigation></PageNavigation>
+    <PageHeader />
+    <PageNavigation />
+
+    <UpdatesPanel />
 
     <main id="__main">
       <Nuxt />
     </main>
 
-    <PageFooter></PageFooter>
+    <PageFooter />
   </div>
 </template>
