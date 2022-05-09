@@ -27,6 +27,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Projects, paintings, web development and everything in-between by Amanda Eldreth' },
       { name: 'format-detection', content: 'telephone=no' },
+      { name: 'p:domain_verify', content: '54524e210d2f2e771d67450fff0f42a3'},
       {
         hid: 'twitter:title',
         name: 'twitter:title',
@@ -51,7 +52,7 @@ export default {
         hid: 'og:site_name',
         property: 'og:site_name',
         content: 'IKA INK'
-      }
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
