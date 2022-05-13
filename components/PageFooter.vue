@@ -8,9 +8,10 @@
       <div class="page-footer__copyright text-center text-lg-start mb-4 mb-lg-3">
         <p class="mb-0 ml-lg-2">©{{ year }} {{ $config.websiteTitle }} - All rights reserved.</p>
         <p class="mb-0 ml-lg-2">
-          <NuxtLink to="/privacy-policy">Privacy Policy</NuxtLink>&nbsp;|&nbsp;
-          <NuxtLink to="/terms-of-use">Terms of Use</NuxtLink>&nbsp;|&nbsp;
-          <NuxtLink to="/credits">Credits</NuxtLink>
+          <NuxtLink to="/privacy-policy">Privacy Policy</NuxtLink>&nbsp;|&nbsp; 
+          <NuxtLink to="/terms-of-use">Terms of Use</NuxtLink>&nbsp;|&nbsp; 
+          <NuxtLink to="/credits">Credits</NuxtLink>&nbsp;|&nbsp; 
+          <NuxtLink to="/tattoo-policy">Tattoo Policy</NuxtLink>
         </p>
       </div>
     </div>
