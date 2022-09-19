@@ -9,10 +9,12 @@
       <h1 class="text-display--xs mb-0" slot="header">News & Updates</h1>
 
       <div slot="body">
-        <div v-for="update in updates" :key="update.id" class="update">
+        <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+        <div class="elfsight-app-62efc38f-9abd-44e9-a86f-1a2acff01663"></div>
+        <!-- <div v-for="update in updates" :key="update.id" class="update">
           <h2 class="update__heading text-display--xxs">{{ formatDate(update.date_published) }}</h2>
           <div v-html="update.text"></div>
-        </div>
+        </div> -->
       </div>
     </UiOffcanvas>
   </div>
@@ -27,7 +29,7 @@ export default {
   },
 
   mounted() {
-    this.getUpdates()
+    // this.getUpdates()
   },
 
   methods: {

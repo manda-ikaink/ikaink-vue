@@ -18,9 +18,9 @@
           <span class="visually-hidden">{{ $config.websiteTitle }}: </span>
           <div class="home-hero__hover">
             <div v-for="link in page.links" :key="link.name" class="position-relative">
-              <NuxtLink :to="link.url" :target="link.target" :title="link.tool_tip ? link.tool_tip : null">
+              <a :href="link.url" :target="link.target" :title="link.tool_tip ? link.tool_tip : null">
                 {{ link.name }}
-              </NuxtLink>
+              </a>
             </div>
           </div>
 

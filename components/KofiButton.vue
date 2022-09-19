@@ -1,6 +1,6 @@
 <template>
   <a class="ko-fi-btn" href="https://ko-fi.com/ikaink" target="_black" rel="noopener">
-    <img src="/Ko-fi_Icon.png" alt="Ko-fi"> Tip Me!
+    <img src="/Ko-fi_Icon.png" alt="Ko-fi"> Support Me
   </a>
 </template>
 
