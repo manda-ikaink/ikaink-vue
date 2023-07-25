@@ -10,6 +10,11 @@
       <div slot="body">
         <ul id="nav-main" class="nav">
           <li class="nav__item">
+            <a id="nav-link-4" class="nav__link" href="https://shop.ika.ink" target="_blank">
+              Shop
+            </a>
+          </li>
+          <li class="nav__item">
             <NuxtLink id="nav-link-0" class="nav__link" to="/about">
               About
             </NuxtLink>
@@ -28,16 +33,6 @@
             <NuxtLink id="nav-link-3" class="nav__link" to="/projects">
               Projects
             </NuxtLink>
-          </li>
-          <li class="nav__item">
-            <a id="nav-link-4" class="nav__link" href="https://buncafe.ika.ink" target="_blank">
-              Shop
-            </a>
-          </li>
-          <li class="nav__item">
-            <a id="nav-link-5" class="nav__link" href="https://ikainkart.etsy.com" target="_blank">
-              Etsy
-            </a>
           </li>
           <li class="nav__item">
             <NuxtLink id="nav-link-6" class="nav__link" to="/contact">
